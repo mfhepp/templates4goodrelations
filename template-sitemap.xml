@@ -1,0 +1,76 @@
+{#
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+		
+	This template is designed for creating a sitemap.xml including a Semantic Sitemap extension.
+	
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+	Sitemap Protocol: http://www.sitemaps.org/protocol.php
+	Semantic Sitemap Extension: http://sw.deri.org/2007/07/sitemapextension/
+	
+	Input parameters:
+		
+	uris : A list of URIs to be included. Each URI is a dictionary with the following properties:
+		uri : The URI / URL of the page to be listed for crawlers
+		lastmod : The date of the last modification of the file in xsd:dateTime format (omission of the time part is okay), YYYY-MM-DD
+		changefreq : Indicator of how frequently that page is likely to change.
+					 Valid values are "always", "hourly", "daily", "weekly", "monthly", "yearly", and "never".
+		priority : The priority of this URI relative to others on your site. Valid values range from 0.0 to 1.0. Default is 0.5.
+					
+	label : A string describing the RDF data dump file for the shop
+	rdf_uri : The URI of the data dump file for the shop. Typically http://www.<domain_name>/goodrelations.rdf
+	rdf_example_product (optional) : The URI of one product item page with RDFa markup
+	rdf_example_company (optional) : The URI of the page containing the company RDFa markup (typically the main or "about" page)
+	rdf_example_brand (optional) : The URI of the page containing the brands RDFa markup 
+	rdf_example_store (optional) : The URI of the page containing the stores RDFa markup 
+	rdf_example_datasheet (optional) : The URI of one product datasheet page with RDFa markup
+	rdf_changefreq (optional) : Indicator of how frequently the RDF data dump file is likely to change.
+					 Valid values are "always", "hourly", "daily", "weekly", "monthly", "yearly", and "never".
+
+#}
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:sc="http://sw.deri.org/2007/07/sitemapextension/scschema.xsd">
+{% for uri in uris %}
+	<url>
+		<loc>{{uri.uri}}</loc>
+		<lastmod>{{uri.lastmod}}</lastmod>
+		<changefreq>{{uri.changefreq}}</changefreq>
+		<priority>{{uri.priority}}</priority>
+	</url>
+{% endfor %}
+	<sc:dataset>
+		<sc:datasetLabel>{{label}}</sc:datasetLabel>
+		<sc:datasetURI>{{rdf_uri}}#dump</sc:datasetURI>
+{% if rdf_example_product %}
+		<sc:sampleURI>{{rdf_example_product}}</sc:sampleURI>
+{% endif %}
+{% if rdf_example_company %}
+		<sc:sampleURI>{{rdf_example_company}}</sc:sampleURI>
+{% endif %}
+{% if rdf_example_brand %}
+		<sc:sampleURI>{{rdf_example_brand}}</sc:sampleURI>
+{% endif %}
+{% if rdf_example_store %}
+		<sc:sampleURI>{{rdf_example_store}}</sc:sampleURI>
+{% endif %}
+{% if rdf_example_datasheet %}
+		<sc:sampleURI>{{rdf_example_datasheet}}</sc:sampleURI>
+{% endif %}
+{% if rdf_example_uri %}
+		<sc:dataDumpLocation>{{rdf_uri}}</sc:dataDumpLocation>
+{% endif %}
+{% if rdf_changefreq %}
+		<changefreq>{{rdf_changefreq}}</changefreq>
+{% endif %}
+	</sc:dataset>
+</urlset>

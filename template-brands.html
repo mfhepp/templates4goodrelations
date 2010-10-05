@@ -1,0 +1,81 @@
+{#
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+		
+	This template is designed for a shop page listing all brands available in the Web shop.
+	
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+	
+	Input parameters:
+	snippet : True or False
+		False: return complete HTML page with proper RDFa header etc.
+		True: return only an RDFa snippet to be inserted in another HTML page
+		
+	title : String for the HTML title element (only if snippet = False)
+	
+	rdf_uri (optional) : URI of an RDF/XML data dump file for the page, if available 
+	
+	brands : A list of brands available in the shop. Each item is a dictionary with the following properties:
+		name : short identifier for the brand, only [a-z0-9-_]. Used to define the hash fragment.
+		company_name : Official name of the brand / company
+		logo_uri (optional) : URI of a logo or image for the brand
+		uri (optional) : URI of the official brand Web page
+	
+#}
+{% if snippet==False %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>{{title}}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% if rdf_uri %}
+	<link rel="meta" type="application/rdf+xml" title="GoodRelations rich e-commerce data in RDF/XML for {{company_name}}" 
+		href="{{rdf_uri}}" />
+{% endif %}
+</head>
+<body>
+<!--- Visible page content -->
+<p>Demo page for a shop&apos;s brand data in GoodRelations.<br />
+Insert the regular HTML markup for your page here.
+<br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+{% endif %}
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can replace the next long div element by the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#" 
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:media="http://search.yahoo.com/searchmonkey/media/">
+{% for brand in brands %}
+  <div about="#{{brand.name}}" typeof="gr:BusinessEntity">
+	<div property="gr:legalName" content="{{brand.company_name}}"></div>
+	<div property="vcard:fn" content="{{brand.company_name}}"></div>
+{% if brand.logo_uri %}
+	<div rel="foaf:depiction" resource="{{brand.logo_uri}}"></div>
+<!-- Brand logo, Yahoo-specific: Image resources must be img elements, set to 1 x 1 pixels in here -->	
+	<span rel="media:image">
+       	<img src="{{brand.logo_uri}}" height="1" width="1" alt="brand logo"/>
+	</span>
+{% endif %}
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<div rel="foaf:page" resource=""></div>
+{% if brand.uri %}
+	<div rel="foaf:page rdfs:seeAlso vcard:url" resource="{{brand.uri}}"></div>
+{% endif %}
+   </div>
+{% endfor %}
+</div>
+{% if snippet==False %}
+</body>
+</html>
+{% endif %}

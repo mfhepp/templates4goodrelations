@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>Best Purchase Electronics: GoodRelations T-Shirt XXL</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="meta" type="application/rdf+xml" title="GoodRelations rich e-commerce data in RDF/XML for Best Purchase Electronics Shop Ltd." 
+		href="http:/www.heppnetz.de/gr4shops/goodrelations.rdf" />
+</head>
+<body>
+<!--- Visible page content -->
+<p>
+Demo page for a single product page in GoodRelations.<br />
+<strong>Product:</strong> GoodRelations T-Shirt Size XXL
+Insert the regular HTML markup for your page here.
+<br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can use the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	 xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:media="http://search.yahoo.com/searchmonkey/media/"
+	 xmlns:product="http://search.yahoo.com/searchmonkey/product/"
+	 xmlns:shop="http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#"
+>
+<!-- Offer --> 
+  <div about="#offer" typeof="gr:Offering">
+	<div property="rdfs:label" content="GoodRelations T-Shirt Size XXL" xml:lang="en"></div>
+	<div property="rdfs:comment" content="GoodRelations T-Shirt Size XXL" xml:lang="en"></div>
+<!-- Semantic link from the company, mind that we use rev, not rel! -->
+	<div rev="gr:offers" resource="http:/www.heppnetz.de/gr4shops/index.html#company"></div>
+<!-- Business function - could also be repair, dispose,... 
+     Important: The value must be a URI from the list at http://purl.org/goodrelations/v1#BusinessFunction -->
+	<div rel="gr:hasBusinessFunction" resource="http://purl.org/goodrelations/v1#Sell"></div>
+<!-- Item price -->
+	<div rel="gr:hasPriceSpecification">
+	  <div typeof="gr:UnitPriceSpecification">
+		<div property="gr:hasCurrency" content="EUR" datatype="xsd:string"></div>
+		<div property="gr:hasCurrencyValue" content="8.99" datatype="xsd:float"></div>
+		<div property="gr:valueAddedTaxIncluded" content="true" datatype="xsd:boolean"></div>
+	  </div>
+	</div>
+<!-- Delivery methods and shipping charges -->
+	<div rel="gr:availableDeliveryMethods" resource="http://purl.org/goodrelations/v1#FederalExpress"></div>
+	<div rel="gr:hasPriceSpecification">
+	  <div typeof="gr:DeliveryChargeSpecification">
+		<div property="gr:hasCurrency" content="EUR" datatype="xsd:string"></div>
+		<div property="gr:hasCurrencyValue" content="10.00" datatype="xsd:float"></div>
+		<div rel="gr:appliesToDeliveryMethod" resource="http://purl.org/goodrelations/v1#FederalExpress"></div>	
+		<div property="gr:eligibleRegions" content="de" datatype="xsd:string"></div>
+		<div property="gr:valueAddedTaxIncluded" content="true" datatype="xsd:boolean"></div>
+	  </div>
+	</div>
+<!-- Validity of the offer -->
+	<div property="gr:validFrom" datatype="xsd:dateTime" content="2010-05-01T00:00:00Z"></div>
+	<div property="gr:validThrough" datatype="xsd:dateTime" content="2010-05-07T23:59:59Z"></div>
+	<div property="gr:eligibleRegions" datatype="xsd:string" content="DE"></div>
+	<div property="gr:eligibleRegions" datatype="xsd:string" content="AT"></div>
+	<div property="gr:eligibleRegions" datatype="xsd:string" content="CH"></div>
+<!-- Payment methods
+     Important: The value must be a URI from the list at http://purl.org/goodrelations/v1#PaymentMethod -->
+	<div rel="gr:acceptedPaymentMethods" resource="http://purl.org/goodrelations/v1#PayPal"></div>
+	<div rel="gr:acceptedPaymentMethods" resource="http://purl.org/goodrelations/v1#MasterCard"></div>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<div rel="foaf:page" resource=""></div>
+<!-- We could use the gr:includes shortcut, but Yahoo does not properly support that -->	
+	<div rel="gr:includesObject">
+	  <div property="gr:amountOfThisGood" content="1" datatype="xsd:float"></div>
+	  <div property="gr:hasUnitOfMeasurement" content="C62" datatype="xsd:string"></div>
+	  <div rel="gr:typeOfGood" resource="#product">
+<!-- Product -->
+		<div about="#product" typeof="gr:ProductOrServicesSomeInstancesPlaceholder product:Product">
+			<div property="rdfs:label" content="GoodRelations T-Shirt Size XXL" xml:lang="en"></div>
+			<div property="rdfs:comment" content="GoodRelations T-Shirt Size XXL" xml:lang="en"></div>
+<!-- Product image, generic -->
+			<div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/gr-tshirt.jpg"></div> 
+<!-- Product image, Yahoo-specific: Image resources should be img elements, set to 1 x 1 pixels in here -->	
+			<span rel="rdfs:seeAlso media:image">
+		       	<img src="http:/www.heppnetz.de/gr4shops/gr-tshirt.jpg" height="1" width="1" alt="product image"/>
+			</span>
+<!-- Product thumbnail -->
+			<div rel="foaf:thumbnail" resource="http:/www.heppnetz.de/gr4shops/gr-tshirt_small.jpg"></div>
+<!-- Product model identifiers -->
+			<div property="gr:hasEAN_UCC-13" content="013803123784" datatype="xsd:string"></div>
+			<div property="gr:hasGTIN-14" content="0013803123784" datatype="xsd:string"></div>
+			<div property="gr:hasStockKeepingUnit" content="GRTSHIRT-XXL" datatype="xsd:string"></div>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+			<div rel="foaf:page" resource=""></div>
+<!-- Inventory level -->
+			<div rel="gr:hasInventoryLevel">
+			  <div typeof="gr:QuantitativeValueFloat">
+				<div property="gr:hasUnitOfMeasurement" content="C62" datatype="xsd:string"></div>
+				<div property="gr:hasMinValueFloat" content="2" datatype="xsd:float"></div>
+			  </div>
+			</div>
+<!-- Using a product ontology like eClassOWL or FreeClassOWL for describing the product type and features in a machine-readable form -->
+<!-- Product type via product ontology -->
+				<div rel="rdf:type" resource="http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#C_tshirts"></div>
+<!-- Product features via product ontology -->
+<!-- Quantitative product feature (float): shop:P_weight -->
+				<div rel="shop:P_weight">
+					<div typeof="gr:QuantitativeValueFloat">
+						<div property="gr:hasUnitOfMeasurement" content="GRM" datatype="xsd:string"></div>
+						<div property="gr:hasValueFloat" content="280" datatype="xsd:float"></div>
+					</div>
+				</div>
+<!-- Quantitative product feature (float): shop:P_operating_temp -->
+				<div rel="shop:P_operating_temp">
+					<div typeof="gr:QuantitativeValueFloat">
+						<div property="gr:hasUnitOfMeasurement" content="CEL" datatype="xsd:string"></div>
+						<div property="gr:hasMinValueFloat" content="5" datatype="xsd:float"></div>
+						<div property="gr:hasMaxValueFloat" content="45" datatype="xsd:float"></div>			
+					</div>
+				</div>
+<!-- Text product feature: shop:P_color -->
+				<div property="shop:P_color" content="ocean blue" xml:lang="en"></div>
+<!-- Boolean product feature: shop:P_all_weather -->
+				<div property="shop:P_all_weather" content="true" datatype="xsd:boolean"></div>
+<!-- Qualitative product feature: shop:P_garment_size --> 
+				<div rel="shop:P_garment_size" resource="http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#V_XXL"></div>
+<!-- Qualitative product feature: shop:P_material --> 
+				<div rel="shop:P_material" resource="http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#V_cotton"></div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+</body>
+</html>

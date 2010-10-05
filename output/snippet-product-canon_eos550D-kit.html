@@ -1,0 +1,98 @@
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can use the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	 xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:media="http://search.yahoo.com/searchmonkey/media/"
+	 xmlns:product="http://search.yahoo.com/searchmonkey/product/"
+>
+<!-- Offer --> 
+  <div about="#offer" typeof="gr:Offering">
+	<div property="rdfs:label" content="Canon Rebel T2i (EOS 550D)" xml:lang="en"></div>
+	<div property="rdfs:comment" content="The Rebel T2i EOS 550D is Canon&#39;s top-of-the-line consumer digital SLR camera.
+It can shoot up to 18 megapixel resolution photos and features an ISO range of 100-6400." xml:lang="en"></div>
+<!-- Semantic link from the company, mind that we use rev, not rel! -->
+	<div rev="gr:offers" resource="http:/www.heppnetz.de/gr4shops/index.html#company"></div>
+<!-- Business function - could also be repair, dispose,... 
+     Important: The value must be a URI from the list at http://purl.org/goodrelations/v1#BusinessFunction -->
+	<div rel="gr:hasBusinessFunction" resource="http://purl.org/goodrelations/v1#Sell"></div>
+<!-- Item price -->
+	<div rel="gr:hasPriceSpecification">
+	  <div typeof="gr:UnitPriceSpecification">
+		<div property="gr:hasCurrency" content="EUR" datatype="xsd:string"></div>
+		<div property="gr:hasCurrencyValue" content="899.00" datatype="xsd:float"></div>
+		<div property="gr:valueAddedTaxIncluded" content="true" datatype="xsd:boolean"></div>
+	  </div>
+	</div>
+<!-- Delivery methods and shipping charges -->
+	<div rel="gr:availableDeliveryMethods" resource="http://purl.org/goodrelations/v1#FederalExpress"></div>
+	<div rel="gr:hasPriceSpecification">
+	  <div typeof="gr:DeliveryChargeSpecification">
+		<div property="gr:hasCurrency" content="EUR" datatype="xsd:string"></div>
+		<div property="gr:hasCurrencyValue" content="10.00" datatype="xsd:float"></div>
+		<div rel="gr:appliesToDeliveryMethod" resource="http://purl.org/goodrelations/v1#FederalExpress"></div>	
+		<div property="gr:eligibleRegions" content="de" datatype="xsd:string"></div>
+		<div property="gr:valueAddedTaxIncluded" content="true" datatype="xsd:boolean"></div>
+	  </div>
+	</div>
+<!-- Validity of the offer -->
+	<div property="gr:validFrom" datatype="xsd:dateTime" content="2010-05-01T00:00:00Z"></div>
+	<div property="gr:validThrough" datatype="xsd:dateTime" content="2010-05-07T23:59:59Z"></div>
+	<div property="gr:eligibleRegions" datatype="xsd:string" content="DE"></div>
+	<div property="gr:eligibleRegions" datatype="xsd:string" content="AT"></div>
+	<div property="gr:eligibleRegions" datatype="xsd:string" content="CH"></div>
+<!-- Payment methods
+     Important: The value must be a URI from the list at http://purl.org/goodrelations/v1#PaymentMethod -->
+	<div rel="gr:acceptedPaymentMethods" resource="http://purl.org/goodrelations/v1#PayPal"></div>
+	<div rel="gr:acceptedPaymentMethods" resource="http://purl.org/goodrelations/v1#MasterCard"></div>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<div rel="foaf:page" resource=""></div>
+<!-- We could use the gr:includes shortcut, but Yahoo does not properly support that -->	
+	<div rel="gr:includesObject">
+	  <div property="gr:amountOfThisGood" content="1" datatype="xsd:float"></div>
+	  <div property="gr:hasUnitOfMeasurement" content="C62" datatype="xsd:string"></div>
+	  <div rel="gr:typeOfGood" resource="#product">
+<!-- Product -->
+		<div about="#product" typeof="gr:ProductOrServicesSomeInstancesPlaceholder product:Product">
+			<div property="rdfs:label" content="Canon Rebel T2i (EOS 550D)" xml:lang="en"></div>
+			<div property="rdfs:comment" content="The Rebel T2i EOS 550D is Canon&#39;s top-of-the-line consumer digital SLR camera.
+It can shoot up to 18 megapixel resolution photos and features an ISO range of 100-6400." xml:lang="en"></div>
+<!-- Product image, generic -->
+			<div rel="foaf:depiction" resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"></div> 
+<!-- Product image, Yahoo-specific: Image resources should be img elements, set to 1 x 1 pixels in here -->	
+			<span rel="rdfs:seeAlso media:image">
+		       	<img src="http://www.heppnetz.de/gr4shops/eos550d.jpg" height="1" width="1" alt="product image"/>
+			</span>
+<!-- Product thumbnail -->
+			<div rel="foaf:thumbnail" resource="http://www.heppnetz.de/gr4shops/eos550d_small.jpg"></div>
+<!-- Product model identifiers -->
+			<div property="gr:hasEAN_UCC-13" content="013803123784" datatype="xsd:string"></div>
+			<div property="gr:hasGTIN-14" content="0013803123784" datatype="xsd:string"></div>
+			<div property="gr:hasStockKeepingUnit" content="CANON_EOS550D-KIT" datatype="xsd:string"></div>
+<!-- Semantic link to manufacturer -->
+			<div rel="gr:hasManufacturer" resource="http:/www.heppnetz.de/gr4shops/brands.html#canon"></div>
+<!-- Semantic link to product make and model dataset ("semantic datasheet") -->
+			<div rel="gr:hasMakeAndModel" resource="http://openean.kaufkauf.net/id/EanUpc_001380303863"></div>
+<!-- Semantic link to consumables (note that we are using "rev" in here)-->
+			<div rev="gr:isConsumableFor" resource="http:/www.heppnetz.de/gr4shops/product_canon_battery.html#product"></div>
+<!-- Semantic link to accessories (note that we are using "rev" in here) -->
+			<div rev="gr:isAccessoryOrSparePartFor" resource="http:/www.heppnetz.de/gr4shops/product_canon_bag.html#product"></div>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+			<div rel="foaf:page" resource=""></div>
+<!-- Inventory level -->
+			<div rel="gr:hasInventoryLevel">
+			  <div typeof="gr:QuantitativeValueFloat">
+				<div property="gr:hasUnitOfMeasurement" content="C62" datatype="xsd:string"></div>
+				<div property="gr:hasMinValueFloat" content="9" datatype="xsd:float"></div>
+			  </div>
+			</div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>

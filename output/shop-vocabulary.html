@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>GoodRelations Rich E-Commerce Vocabulary for Best Purchase Electronics Shop Ltd.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<!--- Visible page content -->
+<p>
+Demo page for a shop&apos;s product categories, properties, and pre-defined values in GoodRelations.
+Insert the regular HTML markup for your page here.
+<br />
+The base URI for this page is <strong>http:/www.heppnetz.de/gr4shops/shop-vocabulary.html</strong><br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->	
+<!-- in RDFa 1.1, you can replace the next long div element by the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#" 
+	xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+<div about="" typeof="owl:Ontology">
+	<div property="dc:creator" content="Best Purchase Electronics Shop Ltd."></div>
+	<div rel="owl:imports" resource="http://purl.org/goodrelations/v1"></div>
+	<div property="dc:rights" content="Insert terms or conditions for using this page or URI of standard license - e.g. Creative Commons"></div>
+</div>
+<h1>Product Categories</h1>
+   <div about="#C_clothing" typeof="owl:Class">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>C_clothing</strong><br />
+	  <div property="rdfs:label" content="Clothing and Accessories (GoodRelations Product or Service Category / Topic)" xml:lang="en">Clothing and Accessories</div>
+	  <div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/images/clothing.png"></div>
+      <div rel="rdfs:subClassOf" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+   </div>
+   <div about="#C_tshirts" typeof="owl:Class">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>C_tshirts</strong><br />
+	  <div property="rdfs:label" content="T-Shirts and related products (GoodRelations Product or Service Category / Topic)" xml:lang="en">T-Shirts and related products</div>
+	  <div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/images/tshirts.png"></div>
+	      <div rel="rdfs:subClassOf" resource="#C_clothing"></div>
+      <div rel="rdfs:subClassOf" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+   </div>
+   <div about="#C_accessories" typeof="owl:Class">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>C_accessories</strong><br />
+	  <div property="rdfs:label" content="Ties and Accessories (GoodRelations Product or Service Category / Topic)" xml:lang="en">Ties and Accessories</div>
+	  <div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/images/accessories.png"></div>
+	      <div rel="rdfs:subClassOf" resource="#C_clothing"></div>
+      <div rel="rdfs:subClassOf" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+   </div>
+<h1>Product Properties</h1>
+<h2>Quantitative Properties</h2>
+   <div about="#P_weight" typeof="owl:ObjectProperty">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>P_weight</strong><br />
+		<div property="rdfs:label" content="Net weight of the product (GoodRelations Product Feature: Quantitative)" xml:lang="en">Net weight of the product</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://purl.org/goodrelations/v1#QuantitativeValueFloat"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#quantitativeProductOrServiceProperty"></div>
+   </div>
+   <div about="#P_operating_temp" typeof="owl:ObjectProperty">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>P_operating_temp</strong><br />
+		<div property="rdfs:label" content="Recommended operating temperature (can be a point value or interval) (GoodRelations Product Feature: Quantitative)" xml:lang="en">Recommended operating temperature (can be a point value or interval)</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://purl.org/goodrelations/v1#QuantitativeValueFloat"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#quantitativeProductOrServiceProperty"></div>
+   </div>
+<h2>Text Properties</h2>
+   <div about="#P_color" typeof="owl:DatatypeProperty">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>P_color</strong><br />
+		<div property="rdfs:label" content="Color of the product (GoodRelations Product Feature: Text)" xml:lang="en">Color of the product</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+		<!-- rdfs:range is unspecified, because it could be untyped RDF literal or xsd:string -->
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#datatypeProductOrServiceProperty"></div>
+   </div>
+   <div about="#P_care_instructions" typeof="owl:DatatypeProperty">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>P_care_instructions</strong><br />
+		<div property="rdfs:label" content="Care and maintenance instructions for the product (GoodRelations Product Feature: Text)" xml:lang="en">Care and maintenance instructions for the product</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+		<!-- rdfs:range is unspecified, because it could be untyped RDF literal or xsd:string -->
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#datatypeProductOrServiceProperty"></div>
+   </div>
+<h2>Boolean Properties</h2>
+   <div about="#P_all_weather" typeof="owl:DatatypeProperty">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>P_all_weather</strong><br />
+		<div property="rdfs:label" content="Suited for all-weather use (GoodRelations Product Feature: Boolean)" xml:lang="en">Suited for all-weather use</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://www.w3.org/2001/XMLSchema#boolean"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#datatypeProductOrServiceProperty"></div>
+   </div>
+<h2>Qualitative Properties</h2>
+   <div about="#P_material" typeof="owl:ObjectProperty">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>P_material</strong><br />
+		<div property="rdfs:label" content="Main material of the product (GoodRelations Product Feature: Qualitative)" xml:lang="en">Main material of the product</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://purl.org/goodrelations/v1#QualitativeValue"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#qualitativeProductOrServiceProperty"></div>
+   </div>
+   <div about="#P_garment_size" typeof="owl:ObjectProperty">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>P_garment_size</strong><br />
+		<div property="rdfs:label" content="Garment size for T-Shirts and Sweaters (GoodRelations Product Feature: Qualitative)" xml:lang="en">Garment size for T-Shirts and Sweaters</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://purl.org/goodrelations/v1#QualitativeValue"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#qualitativeProductOrServiceProperty"></div>
+   </div>
+<h1>Types of Product Features</h1>
+	<div about="#VC_shirt_sizes" typeof="owl:Class">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>VC_shirt_sizes</strong><br/>
+		<div property="rdfs:label" content="Garment sizes for shirts and sweaters (GoodRelations Product Feature Value Group)" xml:lang="en">Garment sizes for shirts and sweaters</div>
+		<div rel="rdfs:subClassOf" resource="http://purl.org/goodrelations/v1#QualitativeValue"></div>
+	</div>
+	<div about="#VC_material_types" typeof="owl:Class">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>VC_material_types</strong><br/>
+		<div property="rdfs:label" content="Material types for products (GoodRelations Product Feature Value Group)" xml:lang="en">Material types for products</div>
+		<div rel="rdfs:subClassOf" resource="http://purl.org/goodrelations/v1#QualitativeValue"></div>
+	</div>
+<h1>Predefined Values for Product Features</h1>
+   <div about="#V_S" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_S</strong><br />
+	  	<div property="rdfs:label" content="Garment size: Small (S) (GoodRelations Product Feature Value)" xml:lang="en">Garment size: Small (S)</div>
+		<div rel="rdf:type" resource="#VC_shirt_sizes"></div>
+		<div rel="gr:lesser" resource="#V_M"></div>
+   </div>
+   <div about="#V_M" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_M</strong><br />
+	  	<div property="rdfs:label" content="Garment size: Medium (M) (GoodRelations Product Feature Value)" xml:lang="en">Garment size: Medium (M)</div>
+		<div rel="rdf:type" resource="#VC_shirt_sizes"></div>
+		<div rel="gr:lesser" resource="#V_L"></div>
+		<div rel="gr:greater" resource="#V_S"></div>
+   </div>
+   <div about="#V_L" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_L</strong><br />
+	  	<div property="rdfs:label" content="Garment size: Large (L) (GoodRelations Product Feature Value)" xml:lang="en">Garment size: Large (L)</div>
+		<div rel="rdf:type" resource="#VC_shirt_sizes"></div>
+		<div rel="gr:lesser" resource="#V_XL"></div>
+		<div rel="gr:greater" resource="#V_M"></div>
+   </div>
+   <div about="#V_XL" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_XL</strong><br />
+	  	<div property="rdfs:label" content="Garment size: Extra Large (XL) (GoodRelations Product Feature Value)" xml:lang="en">Garment size: Extra Large (XL)</div>
+		<div rel="rdf:type" resource="#VC_shirt_sizes"></div>
+		<div rel="gr:lesser" resource="#V_L"></div>
+		<div rel="gr:greater" resource="#V_XL"></div>
+   </div>
+   <div about="#V_XXL" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_XXL</strong><br />
+	  	<div property="rdfs:label" content="Garment size: XXL (GoodRelations Product Feature Value)" xml:lang="en">Garment size: XXL</div>
+		<div rel="rdf:type" resource="#VC_shirt_sizes"></div>
+		<div rel="gr:greater" resource="#V_XL"></div>
+   </div>
+   <div about="#V_leather" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_leather</strong><br />
+	  	<div property="rdfs:label" content="Material: Genuine Leather (GoodRelations Product Feature Value)" xml:lang="en">Material: Genuine Leather</div>
+		<div rel="rdf:type" resource="#VC_material_types"></div>
+   </div>
+   <div about="#V_cotton" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_cotton</strong><br />
+	  	<div property="rdfs:label" content="Material: Cotton (GoodRelations Product Feature Value)" xml:lang="en">Material: Cotton</div>
+		<div rel="rdf:type" resource="#VC_material_types"></div>
+   </div>
+   <div about="#V_synthetics" typeof="gr:QualitativeValue">http:/www.heppnetz.de/gr4shops/shop-vocabulary.html#<strong>V_synthetics</strong><br />
+	  	<div property="rdfs:label" content="Material: Synthetics (GoodRelations Product Feature Value)" xml:lang="en">Material: Synthetics</div>
+		<div rel="rdf:type" resource="#VC_material_types"></div>
+   </div>
+</div>
+</body>
+</html>

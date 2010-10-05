@@ -1,0 +1,234 @@
+{#
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+		
+	This template is designed for a a page holding the datasheet / features of a product model.
+	
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+
+	Input parameters:
+	snippet : True or False
+		False: return complete HTML page with proper RDFa header etc.
+		True: return only an RDFa snippet to be inserted in another HTML page
+	
+	title : String for the HTML title element (only if snippet = False)
+
+	rdf_uri (optional) : URI of an RDF/XML data dump file for the page, if available 
+	
+	STANDARD PARAMETERS:
+	===================
+	product_short : Short description of the product
+	product_long : Short description of the product
+	language : ISO 639-1 code  (en, de, it, fr,...) for the language of the product texts
+	
+	product_image_uri (optional) : URI of a product image
+	product_thumbnail_uri (optional) : URI of a product image thumbnail
+	ean (optional) : The EAN-13, 13-digit UPC, or 13-digit ISBN code for the product. 
+					 This code is now officially called GTIN-13. 
+					 10-digit ISBNs and 12-digit UPC codes can be converted, see 
+					 	http://www.isbn.org/standards/home/isbn/transition.asp
+					 here for converting ISBNs. Converting 12-digit UPCs into GTIN13 is simpler, just add a preceeding zero.
+	gtin14 (optional) : Global Trade Item Number (GTIN-14) for the product. Leave empty when in doubt.
+	sku (optional) : Store oder brand-specific identifier ("stock keeping unit"). Can be simply your internal ID for the item.
+
+	ADVANCED PARAMETERS: (all optional)
+	===================
+	manufacturer_uri : Semantic link to manufacturer
+	variant_of_uri : Semantic link to baseline product, see http://www.ebusiness-unibw.org/wiki/GoodRelationsVariants
+	consumable_uris : A list of semantic links to consumables suitable for this product
+	accessory_uris : A list of semantic links to accessories compatible with this product
+	related_datasheets_uris : A list of semantic links to products similar to this product
+	predecessor_uris : A list of semantic links to OLDER models
+	successor_uris : A list of semantic links to NEWER models
+
+	product_class_uri : The URI of a class describing the type of product or service
+	
+	prefixes : A list of dictionaries mapping prefixes to their full URIs for external vocabularies. 
+			   Each dictionary has the following two properties	
+					ns_prefix : The prefix to be used for the product ontology defining the properties
+					ns_uri : The base URI of the product ontology used for product properties			
+
+	IMPORTANT: If you want to use product features, you MUST define a prefix for each namespace from
+			   which you are using property URIs, because RDFa requires "compact URIs" for properties ("ceo:hasWeight").
+
+	features : A list of dictionaries holding properties and values describing the product.
+	
+	The individual features have the following properties:
+	uri : The CURIE of the property from the product ontology including the ns_prefix
+	type : "text", "boolean", "quantitative", or "qualitative"
+
+	a) "text"
+	value : The content of the property as text.
+	language : ISO 639-1 code  (en, de, it, fr,...) for the language of the text
+	
+	b) "boolean"
+	value : true or false (according to xsd:boolean)
+	
+	c)"qualitative"
+	value_uri : The full URI of the property value from the product ontology
+
+	d) "quantitative"
+	datatype : "float" or "integer" (usually determined by the product ontology)
+	unit_code : The UN/CEFACT Common Code for the unit of measurement (e.g. CMT for centimeters)
+	value : The value as a string (e.g. "4" or "1.5"). Use dots, no commas.
+	min_value / max_value : The value can also be specified as range.
+	If value is given, min_value and max_value will be ignored. You can use either min_value, max_value, or both
+#}
+{% if snippet==False %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>{{title}}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% if rdf_uri %}
+	<link rel="meta" type="application/rdf+xml" title="GoodRelations rich e-commerce data in RDF/XML for {{company_name}}" 
+		href="{{rdf_uri}}" />
+{% endif %}
+</head>
+<body>
+<!--- Visible page content -->
+<p>
+Demo page for a a page describing the technical properties of a single product using GoodRelations.<br />
+This type of page is most useful for the manufacturers of brand products.<br />
+<strong>Product:</strong> {{product_short}}
+Insert the regular HTML markup for your page here.
+<br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+{% endif %}
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can use the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	 xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+{% for prefix in prefixes %}
+	 xmlns:{{prefix.ns_prefix}}="{{prefix.ns_uri}}"
+{% endfor %}
+>
+<!-- Product model - the "semantic datasheet" -->
+	<div about="#datasheet" typeof="gr:ProductOrServiceModel">
+		<div property="rdfs:label" content="{{product_short}}" xml:lang="{{language}}"></div>
+		<div property="rdfs:comment" content="{{product_long}}" xml:lang="{{language}}"></div>
+{% if product_image_uri %}
+<!-- Product image, generic -->
+		<div rel="foaf:depiction rdfs:seeAlso" resource="{{product_image_uri}}"></div> 
+{% endif %}
+{% if product_thumbnail_uri %}
+<!-- Product thumbnail -->
+		<div rel="foaf:thumbnail" resource="{{product_thumbnail_uri}}"></div>
+<!-- Product model identifiers -->
+{% endif %}
+{% if ean %}
+		<div property="gr:hasEAN_UCC-13" content="{{ean}}" datatype="xsd:string"></div>
+{% endif %}
+{% if gtin14 %}
+		<div property="gr:hasGTIN-14" content="{{gtin14}}" datatype="xsd:string"></div>
+{% endif %}
+{% if sku %}
+		<div property="gr:hasStockKeepingUnit" content="{{sku}}" datatype="xsd:string"></div>
+{% endif %}
+{% if manufacturer_uri %}
+<!-- Semantic link to manufacturer -->
+		<div rel="gr:hasManufacturer" resource="{{manufacturer_uri}}"></div>
+{% endif %}
+{% if variant_of_uri %}
+<!-- Semantic link to baseline product -->
+		<div rel="gr:isVariantOf" resource="{{variant_of_uri}}"></div>
+{% endif %}
+<!-- Semantic link to consumables (mind the "rev" attribute)-->
+{% for consumable_uri in consumable_uris %}
+		<div rev="gr:isConsumableFor" resource="{{consumable_uri}}"></div>
+{% endfor %}
+<!-- Semantic link to accessories (mind the "rev" attribute) -->
+{% for accessory_uri in accessory_uris %}
+		<div rev="gr:isAccessoryOrSparePartFor" resource="{{accessory_uri}}"></div>
+{% endfor %}
+<!-- Semantic link to related (closely similar) product models -->
+{% for datasheet_uri in related_datasheets_uris %}
+		<div rel="gr:isSimilarTo" resource="{{datasheet_uri}}"></div>
+{% endfor %}
+<!-- Semantic link to OLDER models (mind the "rev" attribute) -->
+{% for datasheet_uri in predecessor_uris %}
+		<div rev="gr:predecessorOf" resource="{{datasheet_uri}}"></div>
+{% endfor %}
+<!-- Semantic link to NEWER models (mind the "rev" attribute) -->
+{% for datasheet_uri in successor_uris %}
+		<div rev="gr:successorOf" resource="{{datasheet_uri}}"></div>
+{% endfor %}
+<!-- The following line is very important, for it links between the data and the page that contains the data -->
+		<div rel="foaf:page" resource=""></div>
+{% if product_class_uri or features %}
+<!-- Using a product ontology like eClassOWL or FreeClassOWL for describing the product type and features in a machine-readable form -->
+{% endif %}
+{% if product_class_uri %}
+<!-- Product type via product ontology -->
+			<div rel="rdf:type" resource="{{product_class_uri}}"></div>
+{% endif %}
+{% if features %}
+<!-- Product features via product ontology -->
+{% for feature in features %}
+{% if feature.type == "text" %}
+<!-- Text product feature: {{feature.uri}} -->
+			<div property="{{feature.uri}}" content="{{feature.value}}" xml:lang="{{feature.language}}"></div>
+{% endif %}
+{% if feature.type == "boolean" %}
+<!-- Boolean product feature: {{feature.uri}} -->
+			<div property="{{feature.uri}}" content="{{feature.value}}" datatype="xsd:boolean"></div>
+{% endif %}
+{% if feature.type == "quantitative" and feature.datatype == "float" %}
+<!-- Quantitative product feature (float): {{feature.uri}} -->
+			<div rel="{{feature.uri}}">
+				<div typeof="gr:QuantitativeValueFloat">
+					<div property="gr:hasUnitOfMeasurement" content="{{feature.unit_code}}" datatype="xsd:string"></div>
+{% if feature.value %}
+					<div property="gr:hasValueFloat" content="{{feature.value}}" datatype="xsd:float"></div>
+{% else %}
+{% if feature.min_value %}
+					<div property="gr:hasMinValueFloat" content="{{feature.min_value}}" datatype="xsd:float"></div>
+{% endif %}
+{% if feature.max_value %}
+					<div property="gr:hasMaxValueFloat" content="{{feature.max_value}}" datatype="xsd:float"></div>			
+{% endif %}
+{% endif %}
+				</div>
+			</div>
+{% endif %}
+{% if feature.type == "quantitative" and feature.datatype == "integer" %}
+<!-- Quantitative product feature (integer): {{feature.uri}} -->
+			<div rel="{{feature.uri}}">
+				<div typeof="gr:QuantitativeValueInteger">
+					<div property="gr:hasUnitOfMeasurement" content="{{feature.unit_code}}" datatype="xsd:string"></div>
+{% if feature.value %}
+					<div property="gr:hasValueInteger" content="{{feature.value}}" datatype="xsd:int"></div>
+{% else %}
+{% if feature.min_value %}
+					<div property="gr:hasMinValueInteger" content="{{feature.min_value}}" datatype="xsd:int"></div>
+{% endif %}
+{% if feature.max_value %}
+					<div property="gr:hasMaxValueInteger" content="{{feature.max_value}}" datatype="xsd:int"></div>			
+{% endif %}
+{% endif %}
+				</div>
+			</div>
+{% endif %}
+{% if feature.type == "qualitative" %}
+<!-- Qualitative product feature: {{feature.uri}} --> 
+			<div rel="{{feature.uri}}" resource="{{feature.value_uri}}"></div>
+{% endif %}
+{% endfor %}
+{% endif %}
+	</div>
+</div>
+{% if snippet==False %}
+</body>
+</html>
+{% endif %}

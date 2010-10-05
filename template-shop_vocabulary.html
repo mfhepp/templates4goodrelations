@@ -1,0 +1,168 @@
+{#
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+		
+	This template is designed for exposing a shop-specific product vocabulary.
+	
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+	
+	Input parameters:
+	base_uri : The URI under which this page will be published on the Web
+	language : ISO 639-1 code  (en, de, it, fr,...) for the language of all textual elements
+	
+	company_data : A dictionary holding the following two properties:
+		company_name : The name of the business operating the Web shop
+		license' : A text or URI indicating the license for your vocabulary, e.g. Creative Commons
+
+	CATEGORIES:
+	==========
+	categories : A list of product categories. Each item is a dictionary with the following properties:
+		id : Short identifier for the category, only [a-z0-9-_]. Used to define the hash fragment - > #C_<id>
+		label : Name of the category
+		image_uri (optional) : URI of an image illustrating the category
+		supercategory_id (optional) Short identifier of a parent category.
+	
+	PROPERTIES:
+	==========	
+	quantitative_properties : A list of measurable product features.
+	text_properties : A list of textual product features. 
+	boolean_properties : A list of boolean product features (yes/no). 
+	qualitative_properties : A list of product features with predefined value lists.
+	
+	All three types of lists hold dictionaries with the following properties:
+		id : Short identifier for the feature, only [a-z0-9-_]. Used to define the hash fragment - > #P_<id>
+		label : Name of the feature
+				
+	VALUES AND VALUE CLASSES:
+	========================
+	value_classes : A list of groups for predefined values / features. Each item is a dictionary with the following properties:
+		id : Short identifier for the value group, only [a-z0-9-_]. Used to define the hash fragment - > #VC_<id>
+		label : Name of the group
+		image_uri (optional) : URI of an image illustrating the group
+
+	values : A list of predefined values / features for qualitative properties. 
+		 	 Each item is a dictionary with the following properties:
+		id : Short identifier for the value, only [a-z0-9-_]. Used to define the hash fragment - > #V_<id>
+		label : Name of the value
+		class_id (optional) : Short identifier of the value_class to which the value belongs.
+		image_uri (optional) : URI of an image illustrating the value / feature
+		lesser (optional) : Short identifier of the next GREATER value, if there is an order
+		greater (optional) : Short identifier of the next LESSER value, if there is an order
+	
+#}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>GoodRelations Rich E-Commerce Vocabulary for {{company_data.company_name}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<!--- Visible page content -->
+<p>
+Demo page for a shop&apos;s product categories, properties, and pre-defined values in GoodRelations.
+Insert the regular HTML markup for your page here.
+<br />
+The base URI for this page is <strong>{{base_uri}}</strong><br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->	
+<!-- in RDFa 1.1, you can replace the next long div element by the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#" 
+	xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+<div about="" typeof="owl:Ontology">
+	<div property="dc:creator" content="{{company_data.company_name}}"></div>
+	<div rel="owl:imports" resource="http://purl.org/goodrelations/v1"></div>
+	<div property="dc:rights" content="{{company_data.license}}"></div>
+</div>
+<h1>Product Categories</h1>
+{% for category in categories %}
+   <div about="#C_{{category.id}}" typeof="owl:Class">{{base_uri}}#<strong>C_{{category.id}}</strong><br />
+	  <div property="rdfs:label" content="{{category.label}} (GoodRelations Product or Service Category / Topic)" xml:lang="{{language}}">{{category.label}}</div>
+{% if category.image_uri %}
+	  <div rel="foaf:depiction" resource="{{category.image_uri}}"></div>
+{% endif %}
+{% if category.supercategory_id %}
+	      <div rel="rdfs:subClassOf" resource="#C_{{category.supercategory_id}}"></div>
+{% endif %}
+      <div rel="rdfs:subClassOf" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+   </div>
+{% endfor %}
+<h1>Product Properties</h1>
+<h2>Quantitative Properties</h2>
+{% for property in quantitative_properties %}
+   <div about="#P_{{property.id}}" typeof="owl:ObjectProperty">{{base_uri}}#<strong>P_{{property.id}}</strong><br />
+		<div property="rdfs:label" content="{{property.label}} (GoodRelations Product Feature: Quantitative)" xml:lang="{{language}}">{{property.label}}</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://purl.org/goodrelations/v1#QuantitativeValueFloat"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#quantitativeProductOrServiceProperty"></div>
+   </div>
+{% endfor %}
+<h2>Text Properties</h2>
+{% for property in text_properties %}
+   <div about="#P_{{property.id}}" typeof="owl:DatatypeProperty">{{base_uri}}#<strong>P_{{property.id}}</strong><br />
+		<div property="rdfs:label" content="{{property.label}} (GoodRelations Product Feature: Text)" xml:lang="{{language}}">{{property.label}}</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+		<!-- rdfs:range is unspecified, because it could be untyped RDF literal or xsd:string -->
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#datatypeProductOrServiceProperty"></div>
+   </div>
+{% endfor %}
+<h2>Boolean Properties</h2>
+{% for property in boolean_properties %}
+   <div about="#P_{{property.id}}" typeof="owl:DatatypeProperty">{{base_uri}}#<strong>P_{{property.id}}</strong><br />
+		<div property="rdfs:label" content="{{property.label}} (GoodRelations Product Feature: Boolean)" xml:lang="{{language}}">{{property.label}}</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://www.w3.org/2001/XMLSchema#boolean"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#datatypeProductOrServiceProperty"></div>
+   </div>
+{% endfor %}
+<h2>Qualitative Properties</h2>
+{% for property in qualitative_properties %}
+   <div about="#P_{{property.id}}" typeof="owl:ObjectProperty">{{base_uri}}#<strong>P_{{property.id}}</strong><br />
+		<div property="rdfs:label" content="{{property.label}} (GoodRelations Product Feature: Qualitative)" xml:lang="{{language}}">{{property.label}}</div>
+      	<div rel="rdfs:domain" resource="http://purl.org/goodrelations/v1#ProductOrService"></div>
+      	<div rel="rdfs:range" resource="http://purl.org/goodrelations/v1#QualitativeValue"></div>
+      	<div rel="rdfs:subPropertyOf" resource="http://purl.org/goodrelations/v1#qualitativeProductOrServiceProperty"></div>
+   </div>
+{% endfor %}
+<h1>Types of Product Features</h1>
+{% for class in value_classes %}
+	<div about="#VC_{{class.id}}" typeof="owl:Class">{{base_uri}}#<strong>VC_{{class.id}}</strong><br/>
+		<div property="rdfs:label" content="{{class.label}} (GoodRelations Product Feature Value Group)" xml:lang="{{language}}">{{class.label}}</div>
+		<div rel="rdfs:subClassOf" resource="http://purl.org/goodrelations/v1#QualitativeValue"></div>
+{% if class.image_uri %}
+	  	<div rel="foaf:depiction" resource="{{class.image_uri}}"></div>
+{% endif %}
+	</div>
+{% endfor %}
+<h1>Predefined Values for Product Features</h1>
+{% for value in values %}
+   <div about="#V_{{value.id}}" typeof="gr:QualitativeValue">{{base_uri}}#<strong>V_{{value.id}}</strong><br />
+	  	<div property="rdfs:label" content="{{value.label}} (GoodRelations Product Feature Value)" xml:lang="{{language}}">{{value.label}}</div>
+{% if value.image_uri %}
+		<div rel="foaf:depiction" resource="{{value.image_uri}}"></div>
+{% endif %}
+{% if value.class_id %}
+		<div rel="rdf:type" resource="#VC_{{value.class_id}}"></div>
+{% endif %}
+{% if value.lesser %}
+		<div rel="gr:lesser" resource="#V_{{value.lesser}}"></div>
+{% endif %}
+{% if value.greater %}
+		<div rel="gr:greater" resource="#V_{{value.greater}}"></div>
+{% endif %}
+   </div>
+{% endfor %}
+</div>
+</body>
+</html>

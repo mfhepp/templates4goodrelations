@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>Best Purchase Electronics: List of Brands in Our Store</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="meta" type="application/rdf+xml" title="GoodRelations rich e-commerce data in RDF/XML for Best Purchase Electronics Shop Ltd." 
+		href="http:/www.heppnetz.de/gr4shops/goodrelations.rdf" />
+</head>
+<body>
+<!--- Visible page content -->
+<p>Demo page for a shop&apos;s brand data in GoodRelations.<br />
+Insert the regular HTML markup for your page here.
+<br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can replace the next long div element by the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#" 
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:media="http://search.yahoo.com/searchmonkey/media/">
+  <div about="#canon" typeof="gr:BusinessEntity">
+	<div property="gr:legalName" content="Canon Europe Ltd."></div>
+	<div property="vcard:fn" content="Canon Europe Ltd."></div>
+	<div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/canon.jpg"></div>
+<!-- Brand logo, Yahoo-specific: Image resources must be img elements, set to 1 x 1 pixels in here -->	
+	<span rel="media:image">
+       	<img src="http:/www.heppnetz.de/gr4shops/canon.jpg" height="1" width="1" alt="brand logo"/>
+	</span>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<div rel="foaf:page" resource=""></div>
+	<div rel="foaf:page rdfs:seeAlso vcard:url" resource="http://www.canon.com/"></div>
+   </div>
+  <div about="#ibm" typeof="gr:BusinessEntity">
+	<div property="gr:legalName" content="International Business Machines Inc."></div>
+	<div property="vcard:fn" content="International Business Machines Inc."></div>
+	<div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/ibm.jpg"></div>
+<!-- Brand logo, Yahoo-specific: Image resources must be img elements, set to 1 x 1 pixels in here -->	
+	<span rel="media:image">
+       	<img src="http:/www.heppnetz.de/gr4shops/ibm.jpg" height="1" width="1" alt="brand logo"/>
+	</span>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<div rel="foaf:page" resource=""></div>
+	<div rel="foaf:page rdfs:seeAlso vcard:url" resource="http://www.ibm.com/"></div>
+   </div>
+</div>
+</body>
+</html>

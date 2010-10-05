@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>Best Purchase Electronics: Datasheet for the Canon EOS 550D KIT </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="meta" type="application/rdf+xml" title="GoodRelations rich e-commerce data in RDF/XML for Best Purchase Electronics Shop Ltd." 
+		href="http:/www.heppnetz.de/gr4shops/datasheets.rdf" />
+</head>
+<body>
+<!--- Visible page content -->
+<p>
+Demo page for a a page describing the technical properties of a single product using GoodRelations.<br />
+This type of page is most useful for the manufacturers of brand products.<br />
+<strong>Product:</strong> Canon Rebel T2i (EOS 550D)
+Insert the regular HTML markup for your page here.
+<br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can use the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	 xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	 xmlns:ceo="http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1#"
+>
+<!-- Product model - the "semantic datasheet" -->
+	<div about="#datasheet" typeof="gr:ProductOrServiceModel">
+		<div property="rdfs:label" content="Canon Rebel T2i (EOS 550D)" xml:lang="en"></div>
+		<div property="rdfs:comment" content="The Rebel T2i EOS 550D is Canon&#39;s top-of-the-line consumer digital SLR camera." xml:lang="en"></div>
+<!-- Product image, generic -->
+		<div rel="foaf:depiction rdfs:seeAlso" resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"></div> 
+<!-- Product thumbnail -->
+		<div rel="foaf:thumbnail" resource="http://www.heppnetz.de/gr4shops/eos550d_small.jpg"></div>
+<!-- Product model identifiers -->
+		<div property="gr:hasEAN_UCC-13" content="013803123784" datatype="xsd:string"></div>
+		<div property="gr:hasGTIN-14" content="0013803123784" datatype="xsd:string"></div>
+		<div property="gr:hasStockKeepingUnit" content="CANON_EOS550D-KIT" datatype="xsd:string"></div>
+<!-- Semantic link to manufacturer -->
+		<div rel="gr:hasManufacturer" resource="http:/www.heppnetz.de/gr4shops/brands.html#canon"></div>
+<!-- Semantic link to baseline product -->
+		<div rel="gr:isVariantOf" resource="http:/www.heppnetz.de/gr4shops/datasheet-canon_eos550-series.html#datasheet"></div>
+<!-- Semantic link to consumables (mind the "rev" attribute)-->
+		<div rev="gr:isConsumableFor" resource="http:/www.heppnetz.de/gr4shops/datasheets_canon_battery.html#datasheet"></div>
+<!-- Semantic link to accessories (mind the "rev" attribute) -->
+		<div rev="gr:isAccessoryOrSparePartFor" resource="http:/www.heppnetz.de/gr4shops/datasheets_canon_bag.html#datasheet"></div>
+<!-- Semantic link to related (closely similar) product models -->
+		<div rel="gr:isSimilarTo" resource="http:/www.heppnetz.de/gr4shops/datasheet-canon_eos550D-maxikit.html#datasheet"></div>
+<!-- Semantic link to OLDER models (mind the "rev" attribute) -->
+		<div rev="gr:predecessorOf" resource="http:/www.heppnetz.de/gr4shops/datasheet-canon_eos440D.html#datasheet"></div>
+<!-- Semantic link to NEWER models (mind the "rev" attribute) -->
+		<div rev="gr:successorOf" resource="http:/www.heppnetz.de/gr4shops/datasheet-canon_eos660D.html#datasheet"></div>
+<!-- The following line is very important, for it links between the data and the page that contains the data -->
+		<div rel="foaf:page" resource=""></div>
+<!-- Using a product ontology like eClassOWL or FreeClassOWL for describing the product type and features in a machine-readable form -->
+<!-- Product type via product ontology -->
+			<div rel="rdf:type" resource="http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1#DigitalCamera"></div>
+<!-- Product features via product ontology -->
+<!-- Boolean product feature: ceo:hasDigitalZoom -->
+			<div property="ceo:hasDigitalZoom" content="true" datatype="xsd:boolean"></div>
+<!-- Text product feature: ceo:hasVideoResolution -->
+			<div property="ceo:hasVideoResolution" content="1024x768 pixels" xml:lang="en"></div>
+<!-- Qualitative product feature: ceo:hasDisplayType --> 
+			<div rel="ceo:hasDisplayType" resource="http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1#LCD"></div>
+<!-- Quantitative product feature (float): ceo:hasWeight -->
+			<div rel="ceo:hasWeight">
+				<div typeof="gr:QuantitativeValueFloat">
+					<div property="gr:hasUnitOfMeasurement" content="GRM" datatype="xsd:string"></div>
+					<div property="gr:hasValueFloat" content="280" datatype="xsd:float"></div>
+				</div>
+			</div>
+<!-- Quantitative product feature (float): ceo:hasFocalLength -->
+			<div rel="ceo:hasFocalLength">
+				<div typeof="gr:QuantitativeValueFloat">
+					<div property="gr:hasUnitOfMeasurement" content="MMT" datatype="xsd:string"></div>
+					<div property="gr:hasMinValueFloat" content="20" datatype="xsd:float"></div>
+					<div property="gr:hasMaxValueFloat" content="120" datatype="xsd:float"></div>			
+				</div>
+			</div>
+	</div>
+</div>
+</body>
+</html>

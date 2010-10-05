@@ -1,0 +1,59 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>Website of Best Purchase Electronics Shop Ltd.</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+	
+	<link rel="meta" type="application/rdf+xml" title="GoodRelations rich e-commerce data in RDF/XML for Best Purchase Electronics Shop Ltd." 
+		href="http:/www.heppnetz.de/gr4shops/goodrelations.rdf" />
+			
+</head>
+<body>
+<!--- Visible Page Content -->
+<p>
+	Demo page for a shop&apos;s brand data in GoodRelations.
+	Insert the regular HTML markup for your page here.
+</p>	
+
+
+<!-- in RDFa 1.1, you can replace the next long div element by the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+  xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#" 
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:media="http://search.yahoo.com/searchmonkey/media/" >
+  
+  <span about="#company" typeof="gr:BusinessEntity">
+    <span property="gr:legalName" content="Best Purchase Electronics Shop Ltd."></span>
+    <span property="vcard:fn" content="Best Purchase Electronics Shop Ltd."></span>
+    <span rel="vcard:adr">
+      <span typeof="vcard:Address">
+        <span property="vcard:country-name" content="Germany" xml:lang="en"></span>
+        <span property="vcard:locality" content="Munich" xml:lang="en"></span>
+        <span property="vcard:postal-code" content="12345"></span>
+        <span property="vcard:street-address" content="Example Street 123"></span>
+      </span>
+    </span>
+    <span property="vcard:tel" content="+49-89-6004-4217"></span>
+    <span rel="foaf:depiction media:image" resource="http:/www.heppnetz.de/gr4shops/logo.jpg"></span>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+    <span rel="foaf:page rdfs:seeAlso vcard:url" resource=""></span>
+<!-- the following four lines are optional; omit if you do not have values for the respective properties -->    
+
+    <span property="gr:hasDUNS" content="012345678" datatype="xsd:string"></span>
+
+
+    <span property="gr:hasGlobalLocationNumber" content="1234567890123" datatype="xsd:string"></span>
+
+
+    <span property="gr:hasISICv4" content="5610" datatype="xsd:string"></span>
+
+
+    <span property="gr:hasNAICS" content="722110" datatype="xsd:string"></span>
+
+   </span>
+</div>
+
+
+</body>
+</html>

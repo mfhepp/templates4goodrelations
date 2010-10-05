@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML+RDFa 1.0" xml:lang="en">
+<head>
+	<title>Website of Best Purchase Electronics Shop Ltd.</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="meta" type="application/rdf+xml" title="GoodRelations rich e-commerce data in RDF/XML for Best Purchase Electronics Shop Ltd." 
+		href="http:/www.heppnetz.de/gr4shops/goodrelations.rdf" />
+</head>
+<body>
+<!--- Visible page content -->
+<p>
+Demo page for a shop&apos;s brand data in GoodRelations.
+Insert the regular HTML markup for your page here.
+<br />
+Written by Martin Hepp, http://www.heppnetz.de/.<br />
+All templates and code are available under LPGL. Attribution kindly requested.
+</p>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can replace the next long div element by the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#" 
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
+	xmlns:commerce="http://search.yahoo.com/searchmonkey/commerce/"> 
+	<div about="#company" typeof="vcard:VCard commerce:Business gr:BusinessEntity">
+	<div property="gr:legalName" content="Best Purchase Electronics Shop Ltd."></div>
+	<div property="vcard:fn" content="Best Purchase Electronics Shop Ltd."></div>
+	<div rel="vcard:adr">
+	  <div typeof="vcard:Address">
+		<div property="vcard:country-name" content="Germany" xml:lang="en"></div>
+		<div property="vcard:locality" content="Munich" xml:lang="en"></div>
+		<div property="vcard:postal-code" content="12345"></div>
+		<div property="vcard:street-address" content="Example Street 123"></div>
+	  </div>
+	</div>
+	<div property="vcard:tel" content="+49-89-6004-4217"></div>
+	<div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/logo.jpg"></div>
+<!-- Company logo, Yahoo-specific: Image resources must be img elements, set to 1 x 1 pixels in here -->	
+	<span rel="media:image">
+       	<img src="http:/www.heppnetz.de/gr4shops/logo.jpg" height="1" width="1" alt="company logo"/>
+	</span>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<div rel="foaf:page rdfs:seeAlso vcard:url" resource=""></div>
+<!-- the following four lines are optional; omit if you do not have values for the respective properties -->	
+	<div property="gr:hasDUNS" content="012345678" datatype="xsd:string"></div>
+	<div property="gr:hasGlobalLocationNumber" content="1234567890123" datatype="xsd:string"></div>
+	<div property="gr:hasISICv4" content="5610" datatype="xsd:string"></div>
+	<div property="gr:hasNAICS" content="722110" datatype="xsd:string"></div>
+   </div>
+</div>
+</body>
+</html>

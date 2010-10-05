@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:sc="http://sw.deri.org/2007/07/sitemapextension/scschema.xsd">
+	<url>
+		<loc>http:/www.heppnetz.de/gr4shops/index.html</loc>
+		<lastmod>2010-05-28</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http:/www.heppnetz.de/gr4shops/brands.html</loc>
+		<lastmod>2010-05-28</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http:/www.heppnetz.de/gr4shops/stores.html</loc>
+		<lastmod>2010-05-28</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html</loc>
+		<lastmod>2010-05-28</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http:/www.heppnetz.de/gr4shops/datasheet-canon_eos550D-kit.html</loc>
+		<lastmod>2010-05-28</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<sc:dataset>
+		<sc:datasetLabel>GoodRelations RDF Data Dump for http://www.heppnetz.de/gr4shops/</sc:datasetLabel>
+		<sc:datasetURI>http://www.heppnetz.de/gr4shops/goodrelations.rdf#dump</sc:datasetURI>
+		<sc:sampleURI>http://www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html</sc:sampleURI>
+		<sc:sampleURI>http://www.heppnetz.de/gr4shops/index.html</sc:sampleURI>
+		<sc:sampleURI>http://www.heppnetz.de/gr4shops/brands.html</sc:sampleURI>
+		<sc:sampleURI>http://www.heppnetz.de/gr4shops/stores.html</sc:sampleURI>
+		<sc:sampleURI>http://www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html</sc:sampleURI>
+		<changefreq>daily</changefreq>
+	</sc:dataset>
+</urlset>

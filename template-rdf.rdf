@@ -1,0 +1,489 @@
+{#
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+		
+	This template is designed for a creating a single data dump file in RDF/XML serving all data to Semantic crawlers.
+	
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+
+	Input parameters:
+	
+	company_data : A dictionary holding all the parameters from template-company.html
+	company_page : The URI of the page holding the company markup (e.g. "http:/www.heppnetz.de/gr4shops/index.html")
+
+	brand_data (optional) : A dictionary holding all the parameters from template-brands.html
+	brands_page (optional) : The URI of the page holding the brands markup (e.g. "http:/www.heppnetz.de/gr4shops/brands.html")
+
+	store_data : A dictionary holding all the parameters from template-stores.html
+	stores_page : The URI of the page holding the stores markup (e.g. "http:/www.heppnetz.de/gr4shops/stores.html")
+
+	product_data (optional) : A list of dictionaries holding all product details. 
+			The parameters for each dictionary are the same as for template-product.html
+			Additionally, the following property is required for each product dictionary:
+				product_uri : The URI of the page containing the product markup
+	
+	minimal: True or False
+		False (default) : produces complete GoodRelations mark-up for the product data part.
+		True : produces minimal GoodRelations mark-up the product data part
+				
+	datasheet_data (optional) : A list of dictionaries holding all datasheet details. 
+			The parameters for each dictionary are the same as for template-datasheet.html
+			Additionally, the following property is required for each datasheet dictionary:
+				datasheet_uri : The URI of the page containing the product markup				
+
+	prefixes : A list of dictionaries mapping prefixes to their full URIs for external vocabularies. 
+			   Each dictionary has the following two properties	
+					ns_prefix : The prefix to be used for the product ontology defining the properties
+					ns_uri : The base URI of the product ontology used for product properties
+					
+	Prefixes are optional for RDF/XML but mandatory for product features in RDFa 1.0.
+	
+#}
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<rdf:RDF
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:gr="http://purl.org/goodrelations/v1#"
+  xmlns:media="http://search.yahoo.com/searchmonkey/media/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:product="http://search.yahoo.com/searchmonkey/product/"
+  xmlns:commerce="http://search.yahoo.com/searchmonkey/commerce/"
+{% for prefix in prefixes %}
+  xmlns:{{prefix.ns_prefix}}="{{prefix.ns_uri}}"
+{% endfor %}
+> 
+{% if company_data %}
+<!--
+=========================
+	 COMPANY DATA 
+=========================
+-->
+  <gr:BusinessEntity rdf:about="{{company_page}}#company">
+	<gr:legalName>{{company_data.company_name}}</gr:legalName>
+	<vcard:fn>{{company_data.company_name}}</vcard:fn>
+	<foaf:page rdf:resource="{{company_page}}"/>
+	<vcard:url rdf:resource="{{company_page}}"/>
+	<rdfs:seeAlso rdf:resource="{{company_page}}"/>
+	<vcard:adr>
+	  <vcard:Address>
+		<vcard:country-name xml:lang="{{company_data.language}}">{{company_data.country}}</vcard:country-name>
+		<vcard:locality xml:lang="{{company_data.language}}">{{company_data.city}}</vcard:locality>
+		<vcard:postal-code>{{company_data.zip}}</vcard:postal-code>
+		<vcard:street-address>{{company_data.street}}</vcard:street-address>
+	  </vcard:Address>
+	</vcard:adr>
+	<vcard:tel>{{company_data.phone}}</vcard:tel>
+{% if company_data.logo_uri %}
+	<foaf:depiction rdf:resource="{{company_data.logo_uri}}"/>
+	<media:image rdf:resource="{{company_data.logo_uri}}"/>
+	<rdfs:seeAlso rdf:resource="{{company_data.logo_uri}}"/>
+{% endif %}
+{% if company_data.duns %}
+	<gr:hasDUNS rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{company_data.duns}}</gr:hasDUNS>
+{% endif %}
+{% if company_data.gln %}
+	<gr:hasGlobalLocationNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{company_data.gln}}</gr:hasGlobalLocationNumber>
+{% endif %}
+{% if company_data.isic %}
+	<gr:hasISICv4 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{company_data.isic}}</gr:hasISICv4>
+{% endif %}
+{% if company_data.naics %}
+	<gr:hasNAICS rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{company_data.naics}}</gr:hasNAICS>
+{% endif %}
+  </gr:BusinessEntity>
+{% endif %}
+{% if brand_data %}
+<!--
+===============================
+	 BRANDS DATA 
+===============================
+-->
+{% for brand in brand_data.brands %}
+  <gr:BusinessEntity rdf:about="{{brands_page}}#{{brand.name}}">
+	<gr:legalName>{{brand.company_name}}</gr:legalName>
+	<vcard:fn>{{brand.company_name}}</vcard:fn>
+	<foaf:page rdf:resource="{{brands_page}}"/>
+{% if brand.logo_uri %}
+	<foaf:depiction rdf:resource="{{brand.logo_uri}}"/>
+	<media:image rdf:resource="{{brand.logo_uri}}"/>
+{% endif %}
+{% if brand.uri %}
+	<foaf:page rdf:resource="{{brand.uri}}"/>
+	<rdfs:seeAlso rdf:resource="{{brand.uri}}"/>
+	<vcard:url rdf:resource="{{brand.uri}}"/>
+{% endif %}
+  </gr:BusinessEntity>
+{% endfor %}
+{% endif %}
+{% if store_data %}
+<!--
+===============================
+	 STORE DATA 
+===============================
+-->
+{% for store in store_data.stores %}
+{% if company_uri %}
+<!-- Semantic link from the company -->
+	<rdf:Description rdf:about="{{company_page}}#company">
+		<gr:hasPOS rdf:resource"{{stores_page}}#{{store.id}}" />
+	</rdf:Description> 
+{% endif %}
+<gr:LocationOfSalesOrServiceProvisioning rdf:about="{{stores_page}}#{{store.id}}">
+	<rdf:type rdf:resource="http://search.yahoo.com/searchmonkey/commerce/Business "/>
+	<rdfs:label xml:lang="{{store.language}}">{{store.name}}</rdfs:label>
+	<vcard:fn xml:lang="{{store.language}}">{{store.name}}</vcard:fn>
+	<rdfs:comment xml:lang="{{store.language}}">{{store.description}}</rdfs:comment>
+	<vcard:adr>
+		<vcard:Address>
+			<vcard:country-name xml:lang="{{store.language}}">{{store.country}}</vcard:country-name>
+			<vcard:locality xml:lang="{{store.language}}">{{store.city}}</vcard:locality>
+			<vcard:postal-code>{{store.zip}}</vcard:postal-code>
+			<vcard:street-address>{{store.street}}</vcard:street-address>
+		</vcard:Address>
+	</vcard:adr>
+	<vcard:tel>{{store.phone}}</vcard:tel>
+{% if store.lat and store.long %}
+<!-- Geo position -->
+	<vcard:geo>
+		<rdf:Description>
+			<vcard:latitude rdf:datatype="xsd:float">{{store.lat}}</vcard:latitude>
+			<vcard:longitude rdf:datatype="xsd:float">{{store.long}}</vcard:longitude>
+		</rdf:Description>
+	</vcard:geo>
+{% endif %}
+{% if store.logo_uri %}
+<!-- Shop logo or image -->
+	<foaf:depiction rdf:resource="{{store.logo_uri}}"/>
+	<media:image rdf:resource="{{store.logo_uri}}"/>
+{% endif %}
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<foaf:page rdf:resource="{{stores_page}}"/>
+{% if store.gln %}
+	<gr:hasGlobalLocationNumber rdf:datatype="xsd:string">{{store.gln}}</gr:hasGlobalLocationNumber>
+{% endif %}
+{% for hours in store.opening_hours %}
+	<gr:hasOpeningHoursSpecification>
+		<gr:OpeningHoursSpecification>
+			<gr:opens rdf:datatype="xsd:time">{{hours.opens}}</gr:opens>
+			<gr:closes rdf:datatype="xsd:time">{{hours.closes}}</gr:closes>
+{% for day in hours.days %}
+			<gr:hasOpeningHoursDayOfWeek rdf:resource="http://purl.org/goodrelations/v1#{{day}}"/>
+{% endfor %}
+{% if hours.valid_from and hours.valid_through %}
+<!-- Validity of the opening hours -->
+			<gr:validFrom rdf:datatype="xsd:dateTime">{{hours.valid_from}}</gr:validFrom>
+			<gr:validThrough rdf:datatype="xsd:dateTime">{{hours.valid_through}}</gr:validThrough>
+{% endif %}
+		</gr:OpeningHoursSpecification>
+	</gr:hasOpeningHoursSpecification>
+{% endfor %}
+  </gr:LocationOfSalesOrServiceProvisioning>
+{% endfor %}
+{% endif %}
+{% if product_data %}
+<!--
+===============================
+	 PRODUCT / OFFER DATA 
+===============================
+-->
+{% for product in product_data %}
+	<rdf:Description rdf:about="{{company_page}}#company">
+		<gr:offers rdf:resource="{{product.product_uri}}#offer"/>
+	</rdf:Description>
+	<gr:Offering rdf:about="{{product.product_uri}}#offer">
+		<rdfs:label xml:lang="{{product.language}}">{{product.product_short}}</rdfs:label>
+		<rdfs:comment xml:lang="{{product.language}}">{{product.product_long}}</rdfs:comment>
+		<gr:hasBusinessFunction rdf:resource="{{product.business_function}}"/>
+		<gr:hasPriceSpecification>
+		  <gr:UnitPriceSpecification>
+			<gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{product.currency}}</gr:hasCurrency>
+			<gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{product.price}}</gr:hasCurrencyValue>
+			<gr:valueAddedTaxIncluded rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">{{product.vat}}</gr:valueAddedTaxIncluded>
+		  </gr:UnitPriceSpecification>
+		</gr:hasPriceSpecification>
+{% for delivery_option in product.delivery_options %}
+		<gr:availableDeliveryMethods rdf:resource="{{delivery_option.method_uri}}"/>
+{% if not minimal %}
+		<gr:hasPriceSpecification>
+		  <gr:DeliveryChargeSpecification>
+			<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{delivery_option.region}}</gr:eligibleRegions>
+			<gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{delivery_option.currency}}</gr:hasCurrency>
+			<gr:valueAddedTaxIncluded rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">{{delivery_option.vat}}</gr:valueAddedTaxIncluded>
+			<gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{delivery_option.charge}}</gr:hasCurrencyValue>
+			<gr:appliesToDeliveryMethod rdf:resource="{{delivery_option.method_uri}}"/>
+		  </gr:DeliveryChargeSpecification>
+		</gr:hasPriceSpecification>
+{% endif %}
+{% endfor %}
+<!-- Validity of the offer -->
+		<gr:validFrom rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{{product.valid_from}}</gr:validFrom>
+		<gr:validThrough rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{{product.valid_through}}</gr:validThrough>
+{% for region in product.eligible_regions %}
+		<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{region}}</gr:eligibleRegions>
+{% endfor %}
+<!-- Payment methods -->
+{% for payment_method in product.payment_methods %}
+		<gr:acceptedPaymentMethods rdf:resource="{{payment_method}}"/>
+{% endfor %}
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+		<foaf:page rdf:resource="{{product.product_uri}}"/>
+{% if not minimal %}
+		<gr:includes> <!-- RDFa uses includesObject solely because Yahoo does not support the gr:includes shortcut -->
+		  <gr:ProductOrServicesSomeInstancesPlaceholder rdf:about="{{product.product_uri}}#product">
+			<rdf:type rdf:resource="http://search.yahoo.com/searchmonkey/product/Product"/>
+			<rdfs:label xml:lang="{{product.language}}">{{product.product_short}}</rdfs:label>
+			<rdfs:comment xml:lang="{{product.language}}">{{product.product_long}}</rdfs:comment>
+{% if product.product_image_uri %}
+			<foaf:depiction rdf:resource="{{product.product_image_uri}}"/>
+			<media:image rdf:resource="{{product.product_image_uri}}"/>
+			<rdfs:seeAlso rdf:resource="{{product.product_image_uri}}"/>
+{% endif %}
+{% if product.product_thumbnail_uri %}
+			<foaf:thumbnail rdf:resource="{{product.product_thumbnail_uri}}"/>
+{% endif %}
+<!-- Product model identifiers -->
+{% if product.ean %}
+			<gr:hasEAN_UCC-13 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{product.ean}}</gr:hasEAN_UCC-13>
+{% endif %}
+{% if product.gtin14 %}
+			<gr:hasGTIN-14 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{product.gtin14}}</gr:hasGTIN-14>
+{% endif %}
+{% if product.sku %}
+			<gr:hasStockKeepingUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{product.sku}}</gr:hasStockKeepingUnit>
+{% endif %}
+<!-- Semantic link to manufacturer -->
+{% if product.manufacturer_uri %}
+			<gr:hasManufacturer rdf:resource="{{product.manufacturer_uri}}"/>
+{% endif %}
+{% if product.datasheet_uri %}
+<!-- Semantic link to product make and model dataset ("semantic datasheet") -->
+			<gr:hasMakeAndModel rdf:resource="{{product.datasheet_uri}}"/>
+{% endif %}
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+			<foaf:page rdf:resource="{{product.product_uri}}"/>
+{% if product.stock_unit and product.stock_level %}
+			<gr:hasInventoryLevel>
+				<gr:QuantitativeValueFloat>
+					<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{product.stock_unit}}</gr:hasUnitOfMeasurement>
+					<gr:hasMinValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{product.stock_level}}</gr:hasMinValueFloat>
+			  	</gr:QuantitativeValueFloat>
+			</gr:hasInventoryLevel>
+{% endif %}
+{% if product.product_class_uri or product.features %}
+<!-- Using a product ontology like eClassOWL or FreeClassOWL for describing the product type and features in a machine-readable form -->
+{% endif %}
+{% if product.product_class_uri %}
+<!-- Product type via product ontology -->
+			<rdf:type rdf:resource="{{product.product_class_uri}}"/>
+{% endif %}
+{% if product.features %}
+<!-- Product features via product ontology -->
+{% endif %}
+{% for feature in product.features %}
+{% if feature.type == "text" %}
+<!-- Text product feature: {{feature.uri}} -->
+			<{{feature.uri}} xml:lang="{{feature.language}}">{{feature.value}}></{{feature.uri}}>
+{% endif %}
+{% if feature.type == "boolean" %}
+<!-- Boolean product feature: {{feature.uri}} -->
+			<{{feature.uri}} rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">{{feature.value}}></{{feature.uri}}>
+{% endif %}
+{% if feature.type == "quantitative" and feature.datatype == "float" %}
+<!-- Quantitative product feature (float): {{feature.uri}} -->
+			<{{feature.uri}}>
+				<gr:QuantitativeValueFloat>
+					<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{feature.unit_code}}</gr:hasUnitOfMeasurement>
+{% if feature.value %}
+					<gr:hasValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{feature.value}}</gr:hasValueFloat>
+{% else %}
+{% if feature.min_value %}
+					<gr:hasMinValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{feature.min_value}}</gr:hasMinValueFloat>
+{% endif %}
+{% if feature.max_value %}
+					<gr:hasMaxValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{feature.max_value}}</gr:hasMaxValueFloat>
+{% endif %}
+{% endif %}
+				</gr:QuantitativeValueFloat>
+			</{{feature.uri}}>
+{% endif %}
+{% if feature.type == "quantitative" and feature.datatype == "integer" %}
+<!-- Quantitative product feature (integer): {{feature.uri}} -->
+			<{{feature.uri}}>
+				<gr:QuantitativeValueInteger>
+					<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{feature.unit_code}}</gr:hasUnitOfMeasurement>
+{% if feature.value %}
+					<gr:hasValueInteger rdf:datatype="http://www.w3.org/2001/XMLSchema#int">{{feature.value}}</gr:hasValueInteger>
+{% else %}
+{% if feature.min_value %}
+					<gr:hasMinValueInteger rdf:datatype="http://www.w3.org/2001/XMLSchema#int">{{feature.min_value}}</gr:hasMinValueInteger>
+{% endif %}
+{% if feature.max_value %}
+					<gr:hasMaxValueInteger rdf:datatype="http://www.w3.org/2001/XMLSchema#int">{{feature.max_value}}</gr:hasMaxValueInteger>
+{% endif %}
+{% endif %}
+				</gr:QuantitativeValueInteger>
+			</{{feature.uri}}>
+{% endif %}
+{% if feature.type == "qualitative" %}
+<!-- Qualitative product feature: {{feature.uri}} --> 
+				<{{feature.uri}} rdf:resource="{{feature.value_uri}}"/>
+{% endif %}
+{% endfor %}
+		  </gr:ProductOrServicesSomeInstancesPlaceholder>
+		</gr:includes>
+{% endif %}
+	</gr:Offering>
+{% for consumable_uri in product.consumable_uris %}
+	<rdf:Description rdf:about="{{consumable_uri}}">
+		<gr:isConsumableFor rdf:resource="{{product.product_uri}}#product"/>
+	</rdf:Description>
+{% endfor %}
+{% for accessory_uri in product.accessory_uris %}
+	<rdf:Description rdf:about="{{accessory_uri}}">
+		<gr:isAccessoryOrSparePartFor rdf:resource="{{product.product_uri}}#product"/>
+	</rdf:Description>
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% if datasheet_data %}
+<!--
+===============================
+	 DATASHEET DATA 
+===============================
+-->
+{% for datasheet in datasheet_data %}
+  <gr:ProductOrServiceModel rdf:about="{{datasheet.datasheet_uri}}#datasheet">
+	<rdfs:label xml:lang="{{datasheet.language}}">{{datasheet.product_short}}</rdfs:label>
+	<rdfs:comment xml:lang="{{datasheet.language}}">{{datasheet.product_long}}</rdfs:comment>
+{% if datasheet.product_image_uri %}
+	<foaf:depiction rdf:resource="{{datasheet.product_image_uri}}"/>
+	<media:image rdf:resource="{{datasheet.product_image_uri}}"/>
+	<rdfs:seeAlso rdf:resource="{{datasheet.product_image_uri}}"/>
+{% endif %}
+{% if datasheet.product_thumbnail_uri %}
+	<foaf:thumbnail rdf:resource="{{datasheet.product_thumbnail_uri}}"/>
+{% endif %}
+<!-- Product model identifiers -->
+{% if datasheet.ean %}
+	<gr:hasEAN_UCC-13 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{datasheet.ean}}</gr:hasEAN_UCC-13>
+{% endif %}
+{% if datasheet.gtin14 %}
+	<gr:hasGTIN-14 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{datasheet.gtin14}}</gr:hasGTIN-14>
+{% endif %}
+{% if datasheet.sku %}
+	<gr:hasStockKeepingUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{datasheet.sku}}</gr:hasStockKeepingUnit>
+{% endif %}
+{% if datasheet.manufacturer_uri %}
+<!-- Semantic link to manufacturer -->
+	<gr:hasManufacturer rdf:resource="{{datasheet.manufacturer_uri}}"/>
+{% endif %}
+{% if datasheet.variant_of_uri %}
+<!-- Semantic link to baseline product -->
+	<gr:isVariantOf rdf:resource="{{datasheet.variant_of_uri}}"/>
+{% endif %}
+<!-- Semantic links to similar products -->
+{% for related_uri in datasheet.related_datasheets_uris %}
+	<gr:isSimilarTo rdf:resource="{{related_uri}}"/>
+{% endfor %}
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<foaf:page rdf:resource="{{datasheet.datasheet_uri}}"/>
+{%if datasheet.product_class_uri or datasheet.features %}
+<!-- Using a product ontology like eClassOWL or FreeClassOWL for describing the product type and features in a machine-readable form -->
+{% endif %}
+{% if datasheet.product_class_uri %}
+<!-- Product type via product ontology -->
+	<rdf:type rdf:resource="{{datasheet.product_class_uri}}"/>
+{% endif %}
+{% if datasheet.features %}
+<!-- Product features via product ontology -->
+{% for feature in datasheet.features %}
+{% if feature.type == "text" %}
+<!-- Text product feature: {{feature.uri}} -->
+	<{{feature.uri}} xml:lang="{{feature.language}}">{{feature.value}}</{{feature.uri}}>
+{% endif %}
+{% if feature.type == "boolean" %}
+<!-- Boolean product feature: {{feature.uri}} -->
+	<{{feature.uri}} rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">{{feature.value}}></{{feature.uri}}>
+{% endif %}
+{% if feature.type == "quantitative" and feature.datatype == "float" %}
+<!-- Quantitative product feature (float): {{feature.uri}} -->
+	<{{feature.uri}}>
+		<gr:QuantitativeValueFloat>
+			<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{feature.unit_code}}</gr:hasUnitOfMeasurement>
+{% if feature.value %}
+			<gr:hasValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{feature.value}}</gr:hasValueFloat>
+{% else %}
+{% if feature.min_value %}
+			<gr:hasMinValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{feature.min_value}}</gr:hasMinValueFloat>
+{% endif %}
+{% if feature.max_value %}
+			<gr:hasMaxValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">{{feature.max_value}}</gr:hasMaxValueFloat>
+{% endif %}
+{% endif %}
+		</gr:QuantitativeValueFloat>
+	</{{feature.uri}}>
+{% endif %}
+{% if feature.type == "quantitative" and feature.datatype == "integer" %}
+<!-- Quantitative product feature (integer): {{feature.uri}} -->
+	<{{feature.uri}}>
+		<gr:QuantitativeValueInteger>
+			<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{{feature.unit_code}}</gr:hasUnitOfMeasurement>
+{% if feature.value %}
+			<gr:hasValueInteger rdf:datatype="http://www.w3.org/2001/XMLSchema#int">{{feature.value}}</gr:hasValueInteger>
+{% else %}
+{% if feature.min_value %}
+			<gr:hasMinValueInteger rdf:datatype="http://www.w3.org/2001/XMLSchema#int">{{feature.min_value}}</gr:hasMinValueInteger>
+{% endif %}
+{% if feature.max_value %}
+			<gr:hasMaxValueInteger rdf:datatype="http://www.w3.org/2001/XMLSchema#int">{{feature.max_value}}</gr:hasMaxValueInteger>
+{% endif %}
+{% endif %}
+		</gr:QuantitativeValueInteger>
+	</{{feature.uri}}>
+{% endif %}
+{% if feature.type == "qualitative" %}
+<!-- Qualitative product feature: {{feature.uri}} --> 
+		<{{feature.uri}} rdf:resource="{{feature.value_uri}}"/>
+{% endif %}
+{% endfor %}
+{% endif %}
+  </gr:ProductOrServiceModel>
+<!-- Semantic link to consumables -->
+{% for consumable_uri in datasheet.consumable_uris %}
+   <rdf:Description rdf:about="{{consumable_uri}}">
+	<gr:isConsumableFor rdf:resource="{{datasheet.datasheet_uri}}#datasheet"/>
+   </rdf:Description>
+{% endfor %}
+<!-- Semantic link to accessories -->	
+{% for accessory_uri in datasheet.accessory_uris %}
+   <rdf:Description rdf:about="{{accessory_uri}}">
+	<gr:isAccessoryOrSparePartFor rdf:resource="{{datasheet.datasheet_uri}}#datasheet"/>
+   </rdf:Description>
+{% endfor %}
+<!-- Semantic link to OLDER models -->
+{% for model_uri in datasheet.predecessor_uris %}
+   <rdf:Description rdf:about="{{model_uri}}">
+	<gr:predecessorOf rdf:resource="{{datasheet.datasheet_uri}}#datasheet"/>
+	</rdf:Description>
+{% endfor %}
+<!-- Semantic link to NEWER models -->
+{% for model_uri in datasheet.successor_uris %}
+   <rdf:Description rdf:about="{{model_uri}}">
+	<gr:successorOf rdf:resource="{{datasheet.datasheet_uri}}#datasheet"/>
+   </rdf:Description>
+{% endfor %}
+{% endfor %}
+{% endif %}
+</rdf:RDF>

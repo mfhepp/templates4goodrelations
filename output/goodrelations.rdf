@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<rdf:RDF
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:gr="http://purl.org/goodrelations/v1#"
+  xmlns:media="http://search.yahoo.com/searchmonkey/media/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:product="http://search.yahoo.com/searchmonkey/product/"
+  xmlns:commerce="http://search.yahoo.com/searchmonkey/commerce/"
+  xmlns:ceo="http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1#"
+> 
+<!--
+=========================
+	 COMPANY DATA 
+=========================
+-->
+  <gr:BusinessEntity rdf:about="http:/www.heppnetz.de/gr4shops/index.html#company">
+	<gr:legalName>Best Purchase Electronics Shop Ltd.</gr:legalName>
+	<vcard:fn>Best Purchase Electronics Shop Ltd.</vcard:fn>
+	<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/index.html"/>
+	<vcard:url rdf:resource="http:/www.heppnetz.de/gr4shops/index.html"/>
+	<rdfs:seeAlso rdf:resource="http:/www.heppnetz.de/gr4shops/index.html"/>
+	<vcard:adr>
+	  <vcard:Address>
+		<vcard:country-name xml:lang="en">Germany</vcard:country-name>
+		<vcard:locality xml:lang="en">Munich</vcard:locality>
+		<vcard:postal-code>12345</vcard:postal-code>
+		<vcard:street-address>Example Street 123</vcard:street-address>
+	  </vcard:Address>
+	</vcard:adr>
+	<vcard:tel>+49-89-6004-4217</vcard:tel>
+	<foaf:depiction rdf:resource="http:/www.heppnetz.de/gr4shops/logo.jpg"/>
+	<media:image rdf:resource="http:/www.heppnetz.de/gr4shops/logo.jpg"/>
+	<rdfs:seeAlso rdf:resource="http:/www.heppnetz.de/gr4shops/logo.jpg"/>
+	<gr:hasDUNS rdf:datatype="http://www.w3.org/2001/XMLSchema#string">012345678</gr:hasDUNS>
+	<gr:hasGlobalLocationNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1234567890123</gr:hasGlobalLocationNumber>
+	<gr:hasISICv4 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5610</gr:hasISICv4>
+	<gr:hasNAICS rdf:datatype="http://www.w3.org/2001/XMLSchema#string">722110</gr:hasNAICS>
+  </gr:BusinessEntity>
+<!--
+===============================
+	 BRANDS DATA 
+===============================
+-->
+  <gr:BusinessEntity rdf:about="http:/www.heppnetz.de/gr4shops/brands.html#canon">
+	<gr:legalName>Canon Europe Ltd.</gr:legalName>
+	<vcard:fn>Canon Europe Ltd.</vcard:fn>
+	<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/brands.html"/>
+	<foaf:depiction rdf:resource="http:/www.heppnetz.de/gr4shops/canon.jpg"/>
+	<media:image rdf:resource="http:/www.heppnetz.de/gr4shops/canon.jpg"/>
+	<foaf:page rdf:resource="http://www.canon.com/"/>
+	<rdfs:seeAlso rdf:resource="http://www.canon.com/"/>
+	<vcard:url rdf:resource="http://www.canon.com/"/>
+  </gr:BusinessEntity>
+  <gr:BusinessEntity rdf:about="http:/www.heppnetz.de/gr4shops/brands.html#ibm">
+	<gr:legalName>International Business Machines Inc.</gr:legalName>
+	<vcard:fn>International Business Machines Inc.</vcard:fn>
+	<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/brands.html"/>
+	<foaf:depiction rdf:resource="http:/www.heppnetz.de/gr4shops/ibm.jpg"/>
+	<media:image rdf:resource="http:/www.heppnetz.de/gr4shops/ibm.jpg"/>
+	<foaf:page rdf:resource="http://www.ibm.com/"/>
+	<rdfs:seeAlso rdf:resource="http://www.ibm.com/"/>
+	<vcard:url rdf:resource="http://www.ibm.com/"/>
+  </gr:BusinessEntity>
+<!--
+===============================
+	 STORE DATA 
+===============================
+-->
+<gr:LocationOfSalesOrServiceProvisioning rdf:about="http:/www.heppnetz.de/gr4shops/stores.html#munich_store">
+	<rdf:type rdf:resource="http://search.yahoo.com/searchmonkey/commerce/Business "/>
+	<rdfs:label xml:lang="en">Best Purchase Electronics Munich Store</rdfs:label>
+	<vcard:fn xml:lang="en">Best Purchase Electronics Munich Store</vcard:fn>
+	<rdfs:comment xml:lang="en">Our Munich store is the best in town ... </rdfs:comment>
+	<vcard:adr>
+		<vcard:Address>
+			<vcard:country-name xml:lang="en">Germany</vcard:country-name>
+			<vcard:locality xml:lang="en">Munich</vcard:locality>
+			<vcard:postal-code>12345</vcard:postal-code>
+			<vcard:street-address>Example Street 123</vcard:street-address>
+		</vcard:Address>
+	</vcard:adr>
+	<vcard:tel>+49-89-6004-4217</vcard:tel>
+<!-- Geo position -->
+	<vcard:geo>
+		<rdf:Description>
+			<vcard:latitude rdf:datatype="xsd:float">48.08</vcard:latitude>
+			<vcard:longitude rdf:datatype="xsd:float">11.64</vcard:longitude>
+		</rdf:Description>
+	</vcard:geo>
+<!-- Shop logo or image -->
+	<foaf:depiction rdf:resource="http:/www.heppnetz.de/gr4shops/munich_shop.jpg"/>
+	<media:image rdf:resource="http:/www.heppnetz.de/gr4shops/munich_shop.jpg"/>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/stores.html"/>
+	<gr:hasGlobalLocationNumber rdf:datatype="xsd:string">1234567890123</gr:hasGlobalLocationNumber>
+	<gr:hasOpeningHoursSpecification>
+		<gr:OpeningHoursSpecification>
+			<gr:opens rdf:datatype="xsd:time">08:00:00</gr:opens>
+			<gr:closes rdf:datatype="xsd:time">18:00:00</gr:closes>
+			<gr:hasOpeningHoursDayOfWeek rdf:resource="http://purl.org/goodrelations/v1#Monday"/>
+			<gr:hasOpeningHoursDayOfWeek rdf:resource="http://purl.org/goodrelations/v1#Tuesday"/>
+			<gr:hasOpeningHoursDayOfWeek rdf:resource="http://purl.org/goodrelations/v1#Wednesday"/>
+			<gr:hasOpeningHoursDayOfWeek rdf:resource="http://purl.org/goodrelations/v1#Thursday"/>
+			<gr:hasOpeningHoursDayOfWeek rdf:resource="http://purl.org/goodrelations/v1#Friday"/>
+<!-- Validity of the opening hours -->
+			<gr:validFrom rdf:datatype="xsd:dateTime">2010-01-01T00:00:00Z</gr:validFrom>
+			<gr:validThrough rdf:datatype="xsd:dateTime">2010-12-31T23:59:59Z</gr:validThrough>
+		</gr:OpeningHoursSpecification>
+	</gr:hasOpeningHoursSpecification>
+	<gr:hasOpeningHoursSpecification>
+		<gr:OpeningHoursSpecification>
+			<gr:opens rdf:datatype="xsd:time">08:00:00</gr:opens>
+			<gr:closes rdf:datatype="xsd:time">18:00:00</gr:closes>
+			<gr:hasOpeningHoursDayOfWeek rdf:resource="http://purl.org/goodrelations/v1#Saturday"/>
+		</gr:OpeningHoursSpecification>
+	</gr:hasOpeningHoursSpecification>
+  </gr:LocationOfSalesOrServiceProvisioning>
+<!--
+===============================
+	 PRODUCT / OFFER DATA 
+===============================
+-->
+	<rdf:Description rdf:about="http:/www.heppnetz.de/gr4shops/index.html#company">
+		<gr:offers rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html#offer"/>
+	</rdf:Description>
+	<gr:Offering rdf:about="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html#offer">
+		<rdfs:label xml:lang="en">Canon Rebel T2i (EOS 550D)</rdfs:label>
+		<rdfs:comment xml:lang="en">The Rebel T2i EOS 550D is Canon&#39;s top-of-the-line consumer digital SLR camera.
+It can shoot up to 18 megapixel resolution photos and features an ISO range of 100-6400.</rdfs:comment>
+		<gr:hasBusinessFunction rdf:resource="http://purl.org/goodrelations/v1#Sell"/>
+		<gr:hasPriceSpecification>
+		  <gr:UnitPriceSpecification>
+			<gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EUR</gr:hasCurrency>
+			<gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">899.00</gr:hasCurrencyValue>
+			<gr:valueAddedTaxIncluded rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</gr:valueAddedTaxIncluded>
+		  </gr:UnitPriceSpecification>
+		</gr:hasPriceSpecification>
+		<gr:availableDeliveryMethods rdf:resource="http://purl.org/goodrelations/v1#FederalExpress"/>
+		<gr:hasPriceSpecification>
+		  <gr:DeliveryChargeSpecification>
+			<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">de</gr:eligibleRegions>
+			<gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EUR</gr:hasCurrency>
+			<gr:valueAddedTaxIncluded rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</gr:valueAddedTaxIncluded>
+			<gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">10.00</gr:hasCurrencyValue>
+			<gr:appliesToDeliveryMethod rdf:resource="http://purl.org/goodrelations/v1#FederalExpress"/>
+		  </gr:DeliveryChargeSpecification>
+		</gr:hasPriceSpecification>
+<!-- Validity of the offer -->
+		<gr:validFrom rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-05-01T00:00:00Z</gr:validFrom>
+		<gr:validThrough rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-05-07T23:59:59Z</gr:validThrough>
+		<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DE</gr:eligibleRegions>
+		<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AT</gr:eligibleRegions>
+		<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CH</gr:eligibleRegions>
+<!-- Payment methods -->
+		<gr:acceptedPaymentMethods rdf:resource="http://purl.org/goodrelations/v1#PayPal"/>
+		<gr:acceptedPaymentMethods rdf:resource="http://purl.org/goodrelations/v1#MasterCard"/>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+		<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html"/>
+		<gr:includes> <!-- RDFa uses includesObject solely because Yahoo does not support the gr:includes shortcut -->
+		  <gr:ProductOrServicesSomeInstancesPlaceholder rdf:about="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html#product">
+			<rdf:type rdf:resource="http://search.yahoo.com/searchmonkey/product/Product"/>
+			<rdfs:label xml:lang="en">Canon Rebel T2i (EOS 550D)</rdfs:label>
+			<rdfs:comment xml:lang="en">The Rebel T2i EOS 550D is Canon&#39;s top-of-the-line consumer digital SLR camera.
+It can shoot up to 18 megapixel resolution photos and features an ISO range of 100-6400.</rdfs:comment>
+			<foaf:depiction rdf:resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"/>
+			<media:image rdf:resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"/>
+			<rdfs:seeAlso rdf:resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"/>
+			<foaf:thumbnail rdf:resource="http://www.heppnetz.de/gr4shops/eos550d_small.jpg"/>
+<!-- Product model identifiers -->
+			<gr:hasEAN_UCC-13 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">013803123784</gr:hasEAN_UCC-13>
+			<gr:hasGTIN-14 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0013803123784</gr:hasGTIN-14>
+			<gr:hasStockKeepingUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CANON_EOS550D-KIT</gr:hasStockKeepingUnit>
+<!-- Semantic link to manufacturer -->
+			<gr:hasManufacturer rdf:resource="http:/www.heppnetz.de/gr4shops/brands.html#canon"/>
+<!-- Semantic link to product make and model dataset ("semantic datasheet") -->
+			<gr:hasMakeAndModel rdf:resource="http://openean.kaufkauf.net/id/EanUpc_001380303863"/>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+			<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html"/>
+			<gr:hasInventoryLevel>
+				<gr:QuantitativeValueFloat>
+					<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
+					<gr:hasMinValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">9</gr:hasMinValueFloat>
+			  	</gr:QuantitativeValueFloat>
+			</gr:hasInventoryLevel>
+		  </gr:ProductOrServicesSomeInstancesPlaceholder>
+		</gr:includes>
+	</gr:Offering>
+	<rdf:Description rdf:about="http:/www.heppnetz.de/gr4shops/product_canon_battery.html#product">
+		<gr:isConsumableFor rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html#product"/>
+	</rdf:Description>
+	<rdf:Description rdf:about="http:/www.heppnetz.de/gr4shops/product_canon_bag.html#product">
+		<gr:isAccessoryOrSparePartFor rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit.html#product"/>
+	</rdf:Description>
+	<rdf:Description rdf:about="http:/www.heppnetz.de/gr4shops/index.html#company">
+		<gr:offers rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit-full.html#offer"/>
+	</rdf:Description>
+	<gr:Offering rdf:about="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit-full.html#offer">
+		<rdfs:label xml:lang="en">Canon Rebel T2i (EOS 550D)</rdfs:label>
+		<rdfs:comment xml:lang="en">The Rebel T2i EOS 550D is Canon&#39;s top-of-the-line consumer digital SLR camera.
+It can shoot up to 18 megapixel resolution photos and features an ISO range of 100-6400.</rdfs:comment>
+		<gr:hasBusinessFunction rdf:resource="http://purl.org/goodrelations/v1#Sell"/>
+		<gr:hasPriceSpecification>
+		  <gr:UnitPriceSpecification>
+			<gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EUR</gr:hasCurrency>
+			<gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">899.00</gr:hasCurrencyValue>
+			<gr:valueAddedTaxIncluded rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</gr:valueAddedTaxIncluded>
+		  </gr:UnitPriceSpecification>
+		</gr:hasPriceSpecification>
+		<gr:availableDeliveryMethods rdf:resource="http://purl.org/goodrelations/v1#FederalExpress"/>
+		<gr:hasPriceSpecification>
+		  <gr:DeliveryChargeSpecification>
+			<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">de</gr:eligibleRegions>
+			<gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EUR</gr:hasCurrency>
+			<gr:valueAddedTaxIncluded rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</gr:valueAddedTaxIncluded>
+			<gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">10.00</gr:hasCurrencyValue>
+			<gr:appliesToDeliveryMethod rdf:resource="http://purl.org/goodrelations/v1#FederalExpress"/>
+		  </gr:DeliveryChargeSpecification>
+		</gr:hasPriceSpecification>
+<!-- Validity of the offer -->
+		<gr:validFrom rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-05-01T00:00:00Z</gr:validFrom>
+		<gr:validThrough rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-05-07T23:59:59Z</gr:validThrough>
+		<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DE</gr:eligibleRegions>
+		<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AT</gr:eligibleRegions>
+		<gr:eligibleRegions rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CH</gr:eligibleRegions>
+<!-- Payment methods -->
+		<gr:acceptedPaymentMethods rdf:resource="http://purl.org/goodrelations/v1#PayPal"/>
+		<gr:acceptedPaymentMethods rdf:resource="http://purl.org/goodrelations/v1#MasterCard"/>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+		<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit-full.html"/>
+		<gr:includes> <!-- RDFa uses includesObject solely because Yahoo does not support the gr:includes shortcut -->
+		  <gr:ProductOrServicesSomeInstancesPlaceholder rdf:about="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit-full.html#product">
+			<rdf:type rdf:resource="http://search.yahoo.com/searchmonkey/product/Product"/>
+			<rdfs:label xml:lang="en">Canon Rebel T2i (EOS 550D)</rdfs:label>
+			<rdfs:comment xml:lang="en">The Rebel T2i EOS 550D is Canon&#39;s top-of-the-line consumer digital SLR camera.
+It can shoot up to 18 megapixel resolution photos and features an ISO range of 100-6400.</rdfs:comment>
+			<foaf:depiction rdf:resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"/>
+			<media:image rdf:resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"/>
+			<rdfs:seeAlso rdf:resource="http://www.heppnetz.de/gr4shops/eos550d.jpg"/>
+			<foaf:thumbnail rdf:resource="http://www.heppnetz.de/gr4shops/eos550d_small.jpg"/>
+<!-- Product model identifiers -->
+			<gr:hasEAN_UCC-13 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">013803123784</gr:hasEAN_UCC-13>
+			<gr:hasGTIN-14 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0013803123784</gr:hasGTIN-14>
+			<gr:hasStockKeepingUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CANON_EOS550D-KIT</gr:hasStockKeepingUnit>
+<!-- Semantic link to manufacturer -->
+			<gr:hasManufacturer rdf:resource="http:/www.heppnetz.de/gr4shops/brands.html#canon"/>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+			<foaf:page rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit-full.html"/>
+			<gr:hasInventoryLevel>
+				<gr:QuantitativeValueFloat>
+					<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
+					<gr:hasMinValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">9</gr:hasMinValueFloat>
+			  	</gr:QuantitativeValueFloat>
+			</gr:hasInventoryLevel>
+<!-- Using a product ontology like eClassOWL or FreeClassOWL for describing the product type and features in a machine-readable form -->
+<!-- Product type via product ontology -->
+			<rdf:type rdf:resource="http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1#DigitalCamera"/>
+<!-- Product features via product ontology -->
+<!-- Boolean product feature: ceo:hasDigitalZoom -->
+			<ceo:hasDigitalZoom rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true></ceo:hasDigitalZoom>
+<!-- Text product feature: ceo:hasVideoResolution -->
+			<ceo:hasVideoResolution xml:lang="en">1024x768 pixels></ceo:hasVideoResolution>
+<!-- Qualitative product feature: ceo:hasDisplayType --> 
+				<ceo:hasDisplayType rdf:resource="http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1#LCD"/>
+<!-- Quantitative product feature (float): ceo:hasWeight -->
+			<ceo:hasWeight>
+				<gr:QuantitativeValueFloat>
+					<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GRM</gr:hasUnitOfMeasurement>
+					<gr:hasValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">280</gr:hasValueFloat>
+				</gr:QuantitativeValueFloat>
+			</ceo:hasWeight>
+<!-- Quantitative product feature (float): ceo:hasFocalLength -->
+			<ceo:hasFocalLength>
+				<gr:QuantitativeValueFloat>
+					<gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MMT</gr:hasUnitOfMeasurement>
+					<gr:hasMinValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">20</gr:hasMinValueFloat>
+					<gr:hasMaxValueFloat rdf:datatype="http://www.w3.org/2001/XMLSchema#float">120</gr:hasMaxValueFloat>
+				</gr:QuantitativeValueFloat>
+			</ceo:hasFocalLength>
+		  </gr:ProductOrServicesSomeInstancesPlaceholder>
+		</gr:includes>
+	</gr:Offering>
+	<rdf:Description rdf:about="http:/www.heppnetz.de/gr4shops/products_canon_battery.html#product">
+		<gr:isConsumableFor rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit-full.html#product"/>
+	</rdf:Description>
+	<rdf:Description rdf:about="http:/www.heppnetz.de/gr4shops/products_canon_bag.html#product">
+		<gr:isAccessoryOrSparePartFor rdf:resource="http:/www.heppnetz.de/gr4shops/product-canon_eos550D-kit-full.html#product"/>
+	</rdf:Description>
+</rdf:RDF>

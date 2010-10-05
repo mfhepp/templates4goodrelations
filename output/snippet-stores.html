@@ -1,0 +1,67 @@
+<!--
+	Jinja / Django Template for GoodRelations Rich E-Commerce
+	Written by Martin Hepp, http://www.heppnetz.de/.
+	All templates and code are available under LPGL. Attribution kindly requested.
+	Wiki: http://www.ebusiness-unibw.org/wiki/GoodRelationsTemplates
+	GoodRelations: http://purl.org/goodrelations/
+-->
+<!-- in RDFa 1.1, you can replace the next long div element by the abbreviation: <div profile="http://www.heppnetz.de/grprofile/"> -->
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gr="http://purl.org/goodrelations/v1#" 
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
+	xmlns:commerce="http://search.yahoo.com/searchmonkey/commerce/"> 
+<div about="#munich_store" typeof="vcard:VCard commerce:Business gr:LocationOfSalesOrServiceProvisioning">
+	<div property="rdfs:label" content="Best Purchase Electronics Munich Store" xml:lang="en"></div>
+	<div property="vcard:fn" content="Best Purchase Electronics Munich Store" xml:lang="en"></div>
+	<div property="rdfs:comment" content="Our Munich store is the best in town ... " xml:lang="en"></div>
+<!-- Semantic link from the company, note that we use rev, not rel! -->
+	<div rev="gr:hasPOS" resource="http:/www.heppnetz.de/gr4shops/index.html#company"></div>
+	<div rel="vcard:adr">
+		<div typeof="vcard:Address">
+			<div property="vcard:country-name" content="Germany" xml:lang="en"></div>
+			<div property="vcard:locality" content="Munich" xml:lang="en"></div>
+			<div property="vcard:postal-code" content="12345"></div>
+			<div property="vcard:street-address" content="Example Street 123"></div>
+		</div>
+	</div>
+	<div property="vcard:tel" content="+49-89-6004-4217"></div>
+<!-- Geo position -->
+	<div rel="vcard:geo">
+		<div>
+			<div property="vcard:latitude" content="48.08" datatype="xsd:float"></div>
+			<div property="vcard:longitude" content="11.64" datatype="xsd:float"></div>
+		</div>
+	</div>
+<!-- Shop logo or image -->
+	<div rel="foaf:depiction" resource="http:/www.heppnetz.de/gr4shops/munich_shop.jpg"></div>
+<!-- Company logo, Yahoo-specific: Image resources must be img elements, set to 1 x 1 pixels in here -->
+	<span rel="media:image">
+		<img src="http:/www.heppnetz.de/gr4shops/munich_shop.jpg" height="1" width="1" alt="store logo"/>
+	</span>
+<!-- the following line is very important, for it links between the data and the page that contains the data -->
+	<div rel="foaf:page rdfs:seeAlso vcard:url" resource=""></div>
+	<div property="gr:hasGlobalLocationNumber" content="1234567890123" datatype="xsd:string"></div>
+	<div rel="gr:hasOpeningHoursSpecification">
+		<div typeof="gr:OpeningHoursSpecification">
+			<div property="gr:opens" content="08:00:00" datatype="xsd:time"></div>
+			<div property="gr:closes" content="18:00:00" datatype="xsd:time"></div>
+			<div rel="gr:hasOpeningHoursDayOfWeek" resource="http://purl.org/goodrelations/v1#Monday"></div>
+			<div rel="gr:hasOpeningHoursDayOfWeek" resource="http://purl.org/goodrelations/v1#Tuesday"></div>
+			<div rel="gr:hasOpeningHoursDayOfWeek" resource="http://purl.org/goodrelations/v1#Wednesday"></div>
+			<div rel="gr:hasOpeningHoursDayOfWeek" resource="http://purl.org/goodrelations/v1#Thursday"></div>
+			<div rel="gr:hasOpeningHoursDayOfWeek" resource="http://purl.org/goodrelations/v1#Friday"></div>
+<!-- Validity of the opening hours -->
+			<div property="gr:validFrom" datatype="xsd:dateTime" content="2010-01-01T00:00:00Z"></div>
+			<div property="gr:validThrough" datatype="xsd:dateTime" content="2010-12-31T23:59:59Z"></div>
+		</div>
+	</div>
+	<div rel="gr:hasOpeningHoursSpecification">
+		<div typeof="gr:OpeningHoursSpecification">
+			<div property="gr:opens" content="08:00:00" datatype="xsd:time"></div>
+			<div property="gr:closes" content="18:00:00" datatype="xsd:time"></div>
+			<div rel="gr:hasOpeningHoursDayOfWeek" resource="http://purl.org/goodrelations/v1#Saturday"></div>
+		</div>
+	</div>
+</div>
+</div>
